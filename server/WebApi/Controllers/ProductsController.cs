@@ -24,7 +24,7 @@
         }
 
         [HttpGet]
-        public IEnumerable<ProductDto> GetProducts()
+        public IEnumerable<Product> GetProducts()
         {
             var products = productsRepository.GetProducts();
 

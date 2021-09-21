@@ -53,6 +53,14 @@ namespace WebApi
             {
                 endpoints.MapControllers();
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var databaseContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+                databaseContext.Database.EnsureDeleted();
+                databaseContext.Database.EnsureCreated();
+                DbGenerator.Initial(databaseContext);
+            }
         }
     }
 }
