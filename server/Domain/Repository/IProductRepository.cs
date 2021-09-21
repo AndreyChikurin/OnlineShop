@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Domain.Models;
 
-    public interface IProductsRepository
+    public interface IProductRepository
     {
         IEnumerable<Product> GetProducts();
 

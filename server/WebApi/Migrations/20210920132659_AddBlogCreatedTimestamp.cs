@@ -3,7 +3,7 @@
     using System;
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class Initial : Migration
+    public partial class AddBlogCreatedTimestamp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

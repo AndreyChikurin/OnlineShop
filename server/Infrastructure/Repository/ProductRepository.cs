@@ -8,7 +8,7 @@
     using Infrastructure.EF;
     using Microsoft.EntityFrameworkCore;
 
-    public class ProductRepository : IProductsRepository
+    public class ProductRepository : IProductRepository
     {
         private DatabaseContext context;
 

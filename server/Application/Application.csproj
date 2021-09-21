@@ -21,11 +21,5 @@
   <ItemGroup>
     <AdditionalFiles Include="../_stylecop/stylecop.json" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DTO\Request\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
   
 </Project>

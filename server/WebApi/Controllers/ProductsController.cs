@@ -12,11 +12,11 @@
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private IProductsRepository productsRepository;
+        private IProductRepository productsRepository;
         private ICategoriesRepository categoriesRepository;
         private ILogger<ProductsController> logger;
 
-        public ProductsController(ILogger<ProductsController> logger, IProductsRepository productsRepository, ICategoriesRepository categoriesRepository)
+        public ProductsController(ILogger<ProductsController> logger, IProductRepository productsRepository, ICategoriesRepository categoriesRepository)
         {
             this.logger = logger;
             this.productsRepository = productsRepository;

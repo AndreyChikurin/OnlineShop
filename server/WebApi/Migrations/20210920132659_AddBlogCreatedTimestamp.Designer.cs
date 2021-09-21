@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210920134650_Initial2")]
-    partial class Initial2
+    [Migration("20210920132659_AddBlogCreatedTimestamp")]
+    partial class AddBlogCreatedTimestamp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
