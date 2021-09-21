@@ -3,6 +3,7 @@ namespace WebApi
     using CleanArchitecture.Infra.Data.Repositories;
     using Domain.Repository;
     using Infrastructure.EF;
+    using Infrastructure.Repository;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -23,12 +24,14 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ICategoriesRepository, CategoriesRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+
+            services.AddControllers();
 
             services.AddDbContext<DatabaseContext>(options =>
            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("WebApi")));
 
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
@@ -44,6 +47,8 @@ namespace WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
             }
+
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

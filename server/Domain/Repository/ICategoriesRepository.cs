@@ -8,6 +8,8 @@
     {
         IEnumerable<Category> GetCategories();
 
-        Category GetProduct(Guid id);
+        Category GetCategory(Guid id);
+
+        List<Product> GetProducts(Guid categoryId);
     }
 }

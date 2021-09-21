@@ -14,6 +14,8 @@
 
         public string Img { get; set; }
 
+        [Required]
+        [Range(1, 100000)]
         public string Quantity { get; set; }
 
         public Guid CategoryTypeqId { get; set; }

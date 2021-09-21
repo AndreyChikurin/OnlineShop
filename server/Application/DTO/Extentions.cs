@@ -14,6 +14,7 @@
                 Price = product.Price,
                 Img = product.Img,
                 Quantity = product.Quantity,
+                CategoryType = product.CategoryType.AsDto(),
             };
         }
 
