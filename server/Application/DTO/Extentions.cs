@@ -1,5 +1,7 @@
 ﻿namespace Application.DTO
 {
+    using System;
+    using Application.DTO.Request;
     using Application.ViewModels;
     using Domain.Models;
 
@@ -25,6 +27,40 @@
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
+            };
+        }
+
+        public static Category AsEntity(this CategoryDto categoryDto)
+        {
+            return new Category()
+            {
+                Id = categoryDto.Id,
+                Name = categoryDto.Name,
+                Description = categoryDto.Description,
+            };
+        }
+
+        public static Product AsEntity(this AddProductDto productDto)
+        {
+            return new Product()
+            {
+                Id = Guid.NewGuid(),
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Img = productDto.Img,
+                Quantity = productDto.Quantity,
+            };
+        }
+
+        public static Product AsEntity(this EditProductDto productDto)
+        {
+            return new Product()
+            {
+                Id = Guid.NewGuid(),
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Img = productDto.Img,
+                Quantity = productDto.Quantity,
             };
         }
     }

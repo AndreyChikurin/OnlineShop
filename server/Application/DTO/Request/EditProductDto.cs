@@ -12,7 +12,7 @@
 
         public string Img { get; set; }
 
-        public string Quatity { get; set; }
+        public int Quantity { get; set; }
 
         public Guid CategoryTypeId { get; set; }
     }
