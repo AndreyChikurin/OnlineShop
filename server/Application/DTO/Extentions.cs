@@ -56,7 +56,7 @@
         {
             return new Product()
             {
-                Id = Guid.NewGuid(),
+                Id = productDto.Id,
                 Name = productDto.Name,
                 Price = productDto.Price,
                 Img = productDto.Img,
