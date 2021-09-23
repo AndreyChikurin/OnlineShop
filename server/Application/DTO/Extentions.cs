@@ -34,7 +34,7 @@
         {
             return new Category()
             {
-                Id = categoryDto.Id,
+                Id = Guid.NewGuid(),
                 Name = categoryDto.Name,
                 Description = categoryDto.Description,
             };
@@ -61,6 +61,26 @@
                 Price = productDto.Price,
                 Img = productDto.Img,
                 Quantity = productDto.Quantity,
+            };
+        }
+
+        public static Category AsEntity(this AddCategoryDto categoryDto)
+        {
+            return new Category()
+            {
+                Id = Guid.NewGuid(),
+                Name = categoryDto.Name,
+                Description = categoryDto.Description,
+            };
+        }
+
+        public static Category AsEntity(this EditCategoryDto categoryDto)
+        {
+            return new Category()
+            {
+                Id = categoryDto.Id,
+                Name = categoryDto.Name,
+                Description = categoryDto.Description,
             };
         }
     }

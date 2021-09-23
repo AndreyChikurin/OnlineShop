@@ -30,7 +30,28 @@
 
         public List<Product> GetProducts(Guid categoryId)
         {
-            return _context.Categories.Where(x => x.Id == categoryId).SingleOrDefault().Products;
+            return _context.Products.Where(x => x.CategoryType.Id == categoryId).ToList();
+        }
+
+        public void EditCategory(Category category)
+        {
+            var existingCategory = _context.Categories.Where(x => x.Id == category.Id).SingleOrDefault();
+            _context.Categories.Remove(existingCategory);
+            _context.Categories.Add(category);
+            _context.SaveChanges();
+        }
+
+        public void DeleteCategory(Guid id)
+        {
+            var existingCategory = _context.Categories.Where(x => x.Id == id).SingleOrDefault();
+            _context.Categories.Remove(existingCategory);
+            _context.SaveChanges();
+        }
+
+        public void AddCategory(Category category)
+        {
+            _context.Categories.Add(category);
+            _context.SaveChanges();
         }
     }
 }
