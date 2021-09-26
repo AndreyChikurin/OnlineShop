@@ -1,21 +1,19 @@
 ﻿namespace Application.ViewModels
 {
-    using Domain.Models;
+    using System;
 
     public class ProductDto
     {
-        public ProductDto(Product product)
-        {
-            this.Id = product.Id;
-            this.Name = product.Name;
-        }
-
-        public ProductDto()
-        {
-        }
-
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public decimal Price { get; set; }
+
+        public string Img { get; set; }
+
+        public int Quantity { get; set; }
+
+        public CategoryDto CategoryType { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿namespace CleanArchitecture.Infra.Data.Repositories
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Domain.Models;
     using Domain.Repository;
@@ -15,16 +17,16 @@
             this.context = context;
         }
 
-        public Product InsertProduct(Product product)
+        public IEnumerable<Product> GetProducts()
         {
-            var entity = context.Add(product);
-            context.SaveChanges();
-            return entity.Entity;
+            return context.Products.Include(c => c.CategoryType).ToList();
         }
 
-        IQueryable<Product> IProductRepository.GetProducts()
+        public Product GetProduct(Guid id)
         {
-            return context.Products.AsNoTracking();
+            var product = context.Products.Include(c => c.CategoryType).SingleOrDefault(x => x.Id == id);
+
+            return product;
         }
     }
 }

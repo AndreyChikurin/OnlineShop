@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using Domain.Models;
 
-    public interface IProductRepository
+    public interface ICategoriesRepository
     {
-        IEnumerable<Product> GetProducts();
+        IEnumerable<Category> GetCategories();
 
-        Product GetProduct(Guid id);
+        Category GetProduct(Guid id);
     }
 }

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Application.DTO.Request;
+    using Application.DTO;
     using Application.Interfaces;
     using Application.ViewModels;
     using Domain.Repository;
@@ -18,12 +18,7 @@
 
         public List<ProductDto> GetProducts()
         {
-            return _productRepository.GetProducts().Select(x => new ProductDto(x)).ToList();
-        }
-
-        public ProductDto InsetProduct(ProductCreateRequestDto product)
-        {
-            return new ProductDto(_productRepository.InsertProduct(product.ToModel()));
+            return _productRepository.GetProducts().Select(x => x.AsDto()).ToList();
         }
     }
 }

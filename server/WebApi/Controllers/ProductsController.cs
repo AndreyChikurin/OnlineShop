@@ -1,9 +1,10 @@
 ﻿namespace WebApi.Controllers
 {
     using System.Collections.Generic;
-    using Application.DTO.Request;
-    using Application.Interfaces;
+    using System.Linq;
+    using Application.DTO;
     using Application.ViewModels;
+    using Domain.Repository;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
@@ -11,25 +12,23 @@
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly ILogger<ProductsController> logger;
-        private IProductService _productService;
+        private IProductRepository productsRepository;
+        private ICategoriesRepository categoriesRepository;
+        private ILogger<ProductsController> logger;
 
-        public ProductsController(ILogger<ProductsController> logger, IProductService productService)
+        public ProductsController(ILogger<ProductsController> logger, IProductRepository productsRepository, ICategoriesRepository categoriesRepository)
         {
             this.logger = logger;
-            _productService = productService;
+            this.productsRepository = productsRepository;
+            this.categoriesRepository = categoriesRepository;
         }
 
         [HttpGet]
-        public ActionResult<List<ProductDto>> Get()
+        public IEnumerable<ProductDto> GetProducts()
         {
-            return Ok(_productService.GetProducts());
-        }
+            var products = productsRepository.GetProducts();
 
-        [HttpPost]
-        public ActionResult<ProductDto> Insert([FromBody] ProductCreateRequestDto product)
-        {
-            return this.Ok(_productService.InsetProduct(product));
+            return products.Select(x => x.AsDto());
         }
     }
 }
