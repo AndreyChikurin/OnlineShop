@@ -12,7 +12,7 @@
     using Microsoft.Extensions.Logging;
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
     {
         private ICategoriesRepository categoriesRepository;
