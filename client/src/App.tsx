@@ -7,10 +7,10 @@ export default function App() {
    return (
       <>
          <UpperPanel />
-           <style>
-              margin-top: 5px;
-           </style>
-         <CardsGrid margin-top/>
+         <div className="box example2">
+              <CardsGrid /> 
+         </div>
+            
       </>
    )
 }
