@@ -93,6 +93,66 @@
                     Quantity = 10,
                     CategoryType = categories[2],
                 },
+
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Apple Watch 6 series",
+                    Price = 500,
+                    Img = "https://d2j6dbq0eux0bg.cloudfront.net/images/14574065/1681854779.jpg",
+                    Quantity = 10,
+                    CategoryType = categories[0],
+                },
+
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Huawei Watch 3 Black",
+                    Price = 400,
+                    Img = "https://img.mvideo.ru/Pdb/30057333b.jpg",
+                    Quantity = 10,
+                    CategoryType = categories[0],
+                },
+
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Invicta Pro Diver",
+                    Price = 140,
+                    Img = "https://cdn2.jomashop.com/media/catalog/product/i/n/invicta-pro-diver-blue-dial-men_s-watch-17056.jpg",
+                    Quantity = 10,
+                    CategoryType = categories[1],
+                },
+
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Orient Bambino",
+                    Price = 210,
+                    Img = "https://senmix.com/pictures/product/02/52/bambino-automatic-mat-tron-mau-xanh-day-da-mau-nau-lich-ngay-ac08002f.jpg",
+                    Quantity = 10,
+                    CategoryType = categories[1],
+                },
+
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Polet",
+                    Price = 270,
+                    Img = "https://www.citytime.ru/upload/iblock/f76/d60/image.jpeg",
+                    Quantity = 10,
+                    CategoryType = categories[2],
+                },
+
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Longines Master Collection",
+                    Price = 90,
+                    Img = "https://luks33.ru/image/cache/catalog/mens/0/timenn-ru-image-cache-data-Longines-rovno-longines-20master-20goldentimenn-ru-3-990x990-900x900.jpg",
+                    Quantity = 10,
+                    CategoryType = categories[2],
+                },
             };
 
             databaseContext.Categories.AddRange(categories);

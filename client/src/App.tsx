@@ -7,8 +7,10 @@ export default function App() {
    return (
       <>
          <UpperPanel />
-         
-         <CardsGrid />
+           <style>
+              margin-top: 5px;
+           </style>
+         <CardsGrid margin-top/>
       </>
    )
 }
