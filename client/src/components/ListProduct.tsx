@@ -1,24 +1,22 @@
-import { useEffect, useState } from 'react';
+import { Key, useContext, useEffect, useState } from 'react';
 import { Service } from '../Service';
 import { Product } from '../models/Product';
 import { useHistory } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { Context } from '../index';
+import { Row } from 'react-bootstrap';
+import ProductItem from './ProductItem';
 
-export default function ListProduct() {
+const ListProduct = observer(() => { 
+    const {product} = useContext(Context)
 
-    
-  const service: Service = new Service();
-
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {async function get() {
-        const prod = await service.getProducts();
-        setProducts(prod);
-  }; get()
+    return (
+      <Row style={{display:'flex'}}>
+          {product.products.map((product: { id: Key | null | undefined; }) =>
+            <ProductItem key={product.id} product={product}/>
+          )}
+      </Row>
+    );  
 });
 
-const history = useHistory()
-console.log(history)
-
-  return products;
-  
-}
+export default ListProduct;
