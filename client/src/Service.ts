@@ -9,7 +9,7 @@ export class Service {
     }
   }
   
-  async getCategiories() {
+  async getCategories() {
     try {
       const ans = await fetch('api/Categories');
       const categoryData = await ans.json();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Service } from 'src/Service';
 import MediaCard from './Card';
@@ -15,8 +15,6 @@ export default function CardsGrid() {
         setProducts(prod);
   }; get()
 });
-
-
   return (
             <Grid container spacing={2} justifyContent="center">
                 {

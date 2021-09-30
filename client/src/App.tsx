@@ -1,16 +1,14 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import CardsGrid from "./components/CardsGrid"
-import UpperPanel from "./components/UpperPanel"
+import AppRouter from "./components/AppRouter"
+import UpperPanel from './components/UpperPanel';
 
 export default function App() {
    return (
-      <>
+      <BrowserRouter>
          <UpperPanel />
-         <div className="box example2">
-              <CardsGrid /> 
-         </div>
-            
-      </>
+         <AppRouter /> 
+      </BrowserRouter>
    )
 }
