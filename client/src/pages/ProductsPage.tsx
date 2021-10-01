@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Container,Image, Row } from 'react-bootstrap';
 import { Button, Card} from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 const ProductsPage = () => {
 

@@ -23,11 +23,12 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import { Grid } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import { SHOP_ROUTE } from 'src/utils/consts';
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from 'src/utils/consts';
 import { Button, ButtonGroup } from '@mui/material';
 import { useContext } from 'react';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
+import { useHistory } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -102,7 +103,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const UpperPanel = observer(() => {
   
-    const {user} = useContext(Context)  
+    const {user} = useContext(Context)
+    const history = useHistory()
         
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -163,8 +165,8 @@ const UpperPanel = observer(() => {
                 {user.isAuth ?
                                 <>
                                 <Button variant="outlined">Basket</Button>
-                                <Button variant="outlined" >Exit</Button>
-                                <Button variant="outlined" >Admin panel</Button>
+                                <Button variant="outlined" onClick={() => (history.push(LOGIN_ROUTE) + user.setIsAuth(false))}>Exit</Button>
+                                <Button variant="outlined" onClick={() => history.push(ADMIN_ROUTE)}>Admin panel</Button>
                                 </>
                             :
                                 <Button variant="outlined" onClick={() => user.setIsAuth(true)}>Authorization</Button>

@@ -7,10 +7,10 @@ import {ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, PRODUCT_ROUTE, REGISTRATION_ROUT
 
 export const authRoutes = [
     
-    {
-        path: ADMIN_ROUTE,
-        Component: Admin
-    },
+    //{
+    //    path: ADMIN_ROUTE,
+    //    Component: Admin
+    //},
     {
         path: BASKET_ROUTE,
         Component: Basket
@@ -33,5 +33,9 @@ export const publicRoutes = [
     {
         path: REGISTRATION_ROUTE,
         Component: Auth
+    },
+    {
+        path: ADMIN_ROUTE,
+        Component: Admin
     },
 ]
