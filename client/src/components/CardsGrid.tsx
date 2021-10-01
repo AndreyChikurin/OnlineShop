@@ -24,7 +24,7 @@ export default function CardsGrid() {
                 {
                     products.map(value => 
                         <Grid item key={value.id} onClick={() => history.push(PRODUCT_ROUTE + '/' + value.id)}>
-                            <MediaCard product = {value} ></MediaCard>
+                            <MediaCard product = {value} > </MediaCard>
                         </Grid>   
                     )
                 }

@@ -10,6 +10,7 @@ const AppRouter = () => {
     console.log(user)
     return (
         <Switch>
+            <Route path='watch/:id'></Route>
             {user.isAuth && authRoutes.map(({path, Component}) =>
                 <Route key = {path} path = {path} component = {Component} exact/>
             )}

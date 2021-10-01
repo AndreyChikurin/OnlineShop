@@ -8,6 +8,16 @@ export class Service {
       throw Error('Failed to fetch products');
     }
   }
+
+  async getProduct(id: string) {
+    try {
+      const response = await fetch('/api/Products/' + id);
+      const productData = await response.json();
+      return productData;
+    } catch (error) {
+      throw Error('Failed to fetch 1 product');
+    }
+  }
   
   async getCategories() {
     try {

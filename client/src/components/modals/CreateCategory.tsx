@@ -9,6 +9,7 @@ const CreateCategory = (show: any | boolean , onHide: any ) => {
         <Modal
             show ={show}    
             onHide={onHide}
+            size="lg"
         >
             <Modal.Header >
                 <Modal.Title >

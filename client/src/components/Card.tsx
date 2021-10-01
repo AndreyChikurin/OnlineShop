@@ -7,6 +7,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@material-ui/core';
 
+//interface IProps {
+//  product: object
+//}
+
 export default function MediaCard(props?: any) {
   return (
     <Card sx={{ minWidth: 250, minHeight: 430, maxWidth: 250, maxHeight: 430 }}>
