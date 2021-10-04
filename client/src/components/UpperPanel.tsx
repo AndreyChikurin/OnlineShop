@@ -25,10 +25,14 @@ import { Grid } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from 'src/utils/consts';
 import { Button, ButtonGroup } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { Service } from 'src/Service';
+import { Category } from 'src/models/Category';
 
 const drawerWidth = 240;
 
@@ -205,6 +209,16 @@ const UpperPanel = observer(() => {
         </MenuItem>
         </Menu>
     );
+        
+    const service: Service = new Service();
+
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    useEffect(() => {async function get() {
+            const cat = await service.getCategories();
+            setCategories(cat);
+    }; get()
+    }, []);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -225,7 +239,7 @@ const UpperPanel = observer(() => {
                 component="div"
                 sx={{ display: { xs: 'none', sm: 'block' } }}
             >
-                <NavLink style={{color:'black'}}to={SHOP_ROUTE}>WatchShop</NavLink>
+                <NavLink style={{color:'black', textDecoration:'none'}}to={SHOP_ROUTE}>WatchShop</NavLink>
             </Typography>
             <Search>
                 <SearchIconWrapper>
@@ -284,12 +298,12 @@ const UpperPanel = observer(() => {
             <Divider />
             <List>
             <Grid container spacing={-1} justifyContent="center">Categiries</Grid>
-            {['Digital', 'Automatic', 'Quartz'].map((text, index) => (
-                <ListItem button key={text}>
+            {categories.map((value, index) => (
+                <ListItem button key={value.name}>
                 <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {index % 2 === 0 ? <FilterAltIcon /> : <FilterListIcon />}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={value.name} />
                 </ListItem>
             ))}
             </List>
