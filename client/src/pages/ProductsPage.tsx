@@ -7,15 +7,15 @@ import { Product } from 'src/models/Product';
 
 const ProductsPage = () => {
     
-    const az : any = useParams()
-    console.log(az.id)
+    const link : any = useParams()
+    console.log(link.id)
     
     const service: Service = new Service();
 
     const [product, setProduct] = useState<Product>();
 
     useEffect(() => {async function get() {
-            const prod = await service.getProduct(az.id);
+            const prod = await service.getProduct(link.id);
             setProduct(prod);
     }; get()
     }, []);

@@ -23,7 +23,7 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import { Grid } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from 'src/utils/consts';
+import { ADMIN_ROUTE, BASKET_ROUTE, FILTER_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from 'src/utils/consts';
 import { Button, ButtonGroup } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from '../index';
@@ -168,7 +168,7 @@ const UpperPanel = observer(() => {
             >
                 {user.isAuth ?
                                 <>
-                                <Button variant="outlined">Basket</Button>
+                                <Button variant="outlined" onClick={() => history.push(BASKET_ROUTE)} >Basket</Button>
                                 <Button variant="outlined" onClick={() => (history.push(LOGIN_ROUTE) + user.setIsAuth(false))}>Exit</Button>
                                 <Button variant="outlined" onClick={() => history.push(ADMIN_ROUTE)}>Admin panel</Button>
                                 </>
@@ -209,7 +209,8 @@ const UpperPanel = observer(() => {
         </MenuItem>
         </Menu>
     );
-        
+    
+    
     const service: Service = new Service();
 
     const [categories, setCategories] = useState<Category[]>([]);
@@ -291,21 +292,21 @@ const UpperPanel = observer(() => {
             open={open}
         >
             <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
+                <IconButton onClick={handleDrawerClose}>
+                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                </IconButton>
             </DrawerHeader>
             <Divider />
             <List>
-            <Grid container spacing={-1} justifyContent="center">Categiries</Grid>
-            {categories.map((value, index) => (
-                <ListItem button key={value.name}>
-                <ListItemIcon>
-                    {index % 2 === 0 ? <FilterAltIcon /> : <FilterListIcon />}
-                </ListItemIcon>
-                <ListItemText primary={value.name} />
-                </ListItem>
-            ))}
+                <Grid container spacing={-1} justifyContent="center">Categiries</Grid>
+                {categories.map(value => (console.log(categories),
+                    <ListItem button key={value.id} onClick={() => history.push(FILTER_ROUTE + '/' + value.id)}>
+                        <ListItemIcon>
+                            <FilterAltIcon /> 
+                        </ListItemIcon>
+                        <ListItemText primary={value.name} />
+                    </ListItem>
+                ))}
             </List>
             <Divider />
             <List>

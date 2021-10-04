@@ -5,6 +5,7 @@ import MediaCard from './Card';
 import { Product } from 'src/models/Product';
 import { useHistory } from 'react-router-dom';
 import { PRODUCT_ROUTE } from 'src/utils/consts';
+import { fetchCategories } from 'src/http/productAPI';
 
 export default function CardsGrid() {
   
@@ -18,7 +19,7 @@ export default function CardsGrid() {
         const prod = await service.getProducts();
         setProducts(prod);
   }; get()
-}, []);
+}, []); 
   return (
             <Grid container spacing={2} justifyContent="center">
                 {
