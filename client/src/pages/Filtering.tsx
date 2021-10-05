@@ -30,14 +30,14 @@ const Filtering = () => {
 
 console.log(products)
   return (
-            <div style={{justifyContent:'center', marginTop:12, marginLeft: 80,marginRight: 80, display:'flex'}}>
+            <Grid style={{justifyContent:'center', marginTop:4, marginLeft: 68,marginRight: 68, display:'flex'}}>
                 {
                     products.map(value => 
                         <Grid onClick={() => history.push(PRODUCT_ROUTE + '/' + value.id) }>
                             {value.categoryType.id === link.id ?
-                                                                <div style={{justifyContent:'center', marginLeft: 16, display:'flex'}}>
+                                                                <Grid style={{justifyContent:'center', margin: 8, display:'flex'}}>
                                                                     <MediaCard  product = {value} > </MediaCard>
-                                                                </div>
+                                                                </Grid>
                                                                 :
                                                                 null
                             }
@@ -45,7 +45,7 @@ console.log(products)
                         </Grid>   
                     )
                 }
-            </div>
+            </Grid>
   );
 }
 
