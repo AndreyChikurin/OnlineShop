@@ -5,9 +5,8 @@
     using System.Linq;
     using Application.DTO;
     using Application.DTO.Request;
+    using Application.Interfaces;
     using Application.ViewModels;
-    using Domain.Models;
-    using Domain.Repository;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
@@ -15,74 +14,71 @@
     [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
     {
-        private ICategoriesRepository categoriesRepository;
+        private ICategoryService categoryService;
         private ILogger<CategoriesController> logger;
 
-        public CategoriesController(ILogger<CategoriesController> logger, ICategoriesRepository categoriesRepository)
+        public CategoriesController(ILogger<CategoriesController> logger, ICategoryService categoryService)
         {
             this.logger = logger;
-            this.categoriesRepository = categoriesRepository;
+            this.categoryService = categoryService;
         }
 
         [HttpGet]
         public IEnumerable<CategoryDto> GetCategories()
         {
-            var categories = categoriesRepository.GetCategories();
-
-            return categories.Select(x => x.AsDto());
+            return categoryService.GetCategories();
         }
 
         [HttpGet("{id}")]
         public ActionResult<CategoryDto> GetCategory(Guid id)
         {
-            var category = categoriesRepository.GetCategory(id);
+            var category = categoryService.GetCategory(id);
 
             if (category is null)
             {
                 return NotFound();
             }
 
-            return category.AsDto();
+            return category;
         }
 
         [HttpPost]
         public ActionResult<CategoryDto> AddCategory(AddCategoryDto categoryDto)
         {
-            Category category = categoryDto.AsEntity();
-            categoriesRepository.AddCategory(category);
-            return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, category.AsDto());
+            var category = categoryDto.AsDto();
+            categoryService.AddCategory(category);
+            return CreatedAtAction(nameof(GetCategories), new { id = category.Id }, category);
         }
 
         [HttpPut]
         public ActionResult<CategoryDto> EditCategory(EditCategoryDto categoryDto)
         {
-            var existingCategory = categoriesRepository.GetCategory(categoryDto.Id);
+            var existingCategory = categoryService.GetCategory(categoryDto.Id);
 
             if (existingCategory is null)
             {
                 return NotFound();
             }
 
-            Category category = categoryDto.AsEntity();
-            categoriesRepository.EditCategory(category);
+            categoryService.EditCategory(categoryDto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteCategory(Guid id)
         {
-            var existingCategory = categoriesRepository.GetCategory(id);
+            var existingCategory = categoryService.GetCategory(id);
 
             if (existingCategory is null)
             {
                 return NotFound();
             }
 
-            var categoryProducts = categoriesRepository.GetProducts(id);
+            var categoryProducts = categoryService.GetProducts(id);
 
             if (categoryProducts.Count() == 0)
             {
-                categoriesRepository.DeleteCategory(id);
+                categoryService.DeleteCategory(id);
                 return NoContent();
             }
 

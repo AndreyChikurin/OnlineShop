@@ -2,12 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Application.DTO;
     using Application.DTO.Request;
+    using Application.Interfaces;
     using Application.ViewModels;
-    using Domain.Models;
-    using Domain.Repository;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
@@ -15,86 +13,87 @@
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private IProductRepository productsRepository;
-        private ICategoriesRepository categoriesRepository;
+        private IProductService productService;
+        private ICategoryService categoryService;
         private ILogger<ProductsController> logger;
 
-        public ProductsController(ILogger<ProductsController> logger, IProductRepository productsRepository, ICategoriesRepository categoriesRepository)
+        public ProductsController(ILogger<ProductsController> logger, IProductService productService, ICategoryService categoryService)
         {
             this.logger = logger;
-            this.productsRepository = productsRepository;
-            this.categoriesRepository = categoriesRepository;
+            this.productService = productService;
+            this.categoryService = categoryService;
         }
 
         [HttpGet]
         public IEnumerable<ProductDto> GetProducts()
         {
-            var products = productsRepository.GetProducts();
-
-            return products.Select(x => x.AsDto());
+            return productService.GetProducts();
         }
 
         [HttpGet("{id}")]
         public ActionResult<ProductDto> GetProduct(Guid id)
         {
-            var product = productsRepository.GetProduct(id);
+            var product = productService.GetProduct(id);
 
             if (product is null)
             {
                 return NotFound();
             }
 
-            return product.AsDto();
+            return product;
         }
 
         [HttpPost]
         public ActionResult<ProductDto> AddProduct(AddProductDto productDto)
         {
-            var exsistingGategory = categoriesRepository.GetCategory(productDto.CategoryTypeId);
+            CategoryDto exsistingGategory = categoryService.GetCategory(productDto.CategoryTypeId);
+
             if (exsistingGategory is null)
             {
                 return NotFound("Category not found");
             }
 
-            Product product = productDto.AsEntity();
+            ProductDto product = productDto.AsDto();
             product.CategoryType = exsistingGategory;
-            productsRepository.AddProduct(product);
-            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product.AsDto());
+            productService.AddProduct(product);
+            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
         [HttpPut]
         public ActionResult EditProduct(EditProductDto productDto)
         {
-            var exsistingGategory = categoriesRepository.GetCategory(productDto.CategoryTypeId);
+            var existingProduct = productService.GetProduct(productDto.Id);
+
+            if (existingProduct is null)
+            {
+                return NotFound("Product not found");
+            }
+
+            var exsistingGategory = categoryService.GetCategory(productDto.CategoryTypeId);
+
             if (exsistingGategory is null)
             {
                 return NotFound("Category not found");
             }
 
-            var existingProduct = productsRepository.GetProduct(productDto.Id);
-
-            if (existingProduct is null)
-            {
-                return NotFound();
-            }
-
-            Product product = productDto.AsEntity();
+            var product = productDto.AsDto();
             product.CategoryType = exsistingGategory;
-            productsRepository.EditProduct(product);
+
+            productService.EditProduct(product);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(Guid id)
         {
-            var existingProduct = productsRepository.GetProduct(id);
+            var existingProduct = productService.GetProduct(id);
 
             if (existingProduct is null)
             {
                 return NotFound();
             }
 
-            productsRepository.DeleteProduct(id);
+            productService.DeleteProduct(id);
             return NoContent();
         }
     }
