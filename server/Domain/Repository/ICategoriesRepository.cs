@@ -8,6 +8,14 @@
     {
         IEnumerable<Category> GetCategories();
 
-        Category GetProduct(Guid id);
+        Category GetCategory(Guid id);
+
+        void AddCategory(Category category);
+
+        void EditCategory(Category category);
+
+        void DeleteCategory(Guid id);
+
+        List<Product> GetProducts(Guid categoryId);
     }
 }
