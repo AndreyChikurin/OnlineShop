@@ -64,18 +64,6 @@
             };
         }
 
-        public static Product AsEntity(this EditProductDto productDto)
-        {
-            return new Product()
-            {
-                Id = productDto.Id,
-                Name = productDto.Name,
-                Price = productDto.Price,
-                Img = productDto.Img,
-                Quantity = productDto.Quantity,
-            };
-        }
-
         public static ProductDto AsDto(this EditProductDto productDto)
         {
             return new ProductDto()

@@ -35,9 +35,9 @@
             return category.AsDto();
         }
 
-        public List<ProductDto> GetProducts(Guid categoryDtoId)
+        public IEnumerable<ProductDto> GetProducts(Guid categoryDtoId)
         {
-            return _categoriesRepository.GetProducts(categoryDtoId).Select(x => x.AsDto()).ToList();
+            return _categoriesRepository.GetProducts(categoryDtoId).Select(x => x.AsDto());
         }
 
         public void EditCategory(EditCategoryDto categoryDto)
@@ -48,8 +48,7 @@
 
         public void DeleteCategory(Guid id)
         {
-            var existingCategory = _categoriesRepository.GetCategory(id);
-            _categoriesRepository.DeleteCategory(existingCategory.Id);
+            _categoriesRepository.DeleteCategory(id);
         }
 
         public void AddCategory(CategoryDto categoryDto)

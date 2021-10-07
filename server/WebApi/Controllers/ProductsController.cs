@@ -62,18 +62,18 @@
         [HttpPut]
         public ActionResult EditProduct(EditProductDto productDto)
         {
-            var exsistingGategory = categoryService.GetCategory(productDto.CategoryTypeId);
-
-            if (exsistingGategory is null)
-            {
-                return NotFound("Category not found");
-            }
-
             var existingProduct = productService.GetProduct(productDto.Id);
 
             if (existingProduct is null)
             {
                 return NotFound("Product not found");
+            }
+
+            var exsistingGategory = categoryService.GetCategory(productDto.CategoryTypeId);
+
+            if (exsistingGategory is null)
+            {
+                return NotFound("Category not found");
             }
 
             var product = productDto.AsDto();

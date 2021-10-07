@@ -17,6 +17,6 @@
 
         void DeleteCategory(Guid id);
 
-        List<ProductDto> GetProducts(Guid categoryId);
+        IEnumerable<ProductDto> GetProducts(Guid categoryId);
     }
 }
