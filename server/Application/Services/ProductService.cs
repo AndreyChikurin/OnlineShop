@@ -50,8 +50,7 @@
 
         public void DeleteProduct(Guid id)
         {
-            var existingProduct = _productRepository.GetProduct(id);
-            _productRepository.DeleteProduct(existingProduct.Id);
+            _productRepository.DeleteProduct(id);
         }
     }
 }
