@@ -53,7 +53,9 @@
 
         public void AddCategory(CategoryDto categoryDto)
         {
-            _categoriesRepository.AddCategory(categoryDto.AsEntity());
+            var category = categoryDto.AsEntity();
+            _categoriesRepository.AddCategory(category);
+            categoryDto.Id = category.Id;
         }
     }
 }

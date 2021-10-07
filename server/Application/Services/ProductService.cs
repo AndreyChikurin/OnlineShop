@@ -36,13 +36,17 @@
 
         public void AddProduct(ProductDto productdto)
         {
-            _productRepository.AddProduct(productdto.AsEntity());
+            var id = productdto.CategoryType.Id;
+            var product = productdto.AsEntity();
+            product.CategoryType.Id = id;
+            _productRepository.AddProduct(product);
+            productdto.Id = product.Id;
         }
 
         public void EditProduct(ProductDto productdto)
         {
             var product = productdto.AsEntity();
-            product.CategoryType = productdto.CategoryType.AsEntity();
+            product.CategoryType.Id = productdto.CategoryType.Id;
             product.Id = productdto.Id;
 
             _productRepository.EditProduct(product);

@@ -47,7 +47,7 @@
         {
             var category = categoryDto.AsDto();
             categoryService.AddCategory(category);
-            return NoContent();
+            return CreatedAtAction(nameof(GetCategories), new { id = category.Id }, category);
         }
 
         [HttpPut]

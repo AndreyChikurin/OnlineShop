@@ -56,7 +56,7 @@
             ProductDto product = productDto.AsDto();
             product.CategoryType = exsistingGategory;
             productService.AddProduct(product);
-            return NoContent();
+            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
         [HttpPut]
