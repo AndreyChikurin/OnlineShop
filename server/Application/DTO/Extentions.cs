@@ -40,11 +40,23 @@
             };
         }
 
-        public static Product AsEntity(this AddProductDto productDto)
+        public static Product AsEntity(this ProductDto productDto)
         {
             return new Product()
             {
                 Id = Guid.NewGuid(),
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Img = productDto.Img,
+                Quantity = productDto.Quantity,
+                CategoryType = productDto.CategoryType.AsEntity(),
+            };
+        }
+
+        public static ProductDto AsDto(this AddProductDto productDto)
+        {
+            return new ProductDto()
+            {
                 Name = productDto.Name,
                 Price = productDto.Price,
                 Img = productDto.Img,
@@ -64,11 +76,22 @@
             };
         }
 
-        public static Category AsEntity(this AddCategoryDto categoryDto)
+        public static ProductDto AsDto(this EditProductDto productDto)
         {
-            return new Category()
+            return new ProductDto()
             {
-                Id = Guid.NewGuid(),
+                Id = productDto.Id,
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Img = productDto.Img,
+                Quantity = productDto.Quantity,
+            };
+        }
+
+        public static CategoryDto AsDto(this AddCategoryDto categoryDto)
+        {
+            return new CategoryDto()
+            {
                 Name = categoryDto.Name,
                 Description = categoryDto.Description,
             };
