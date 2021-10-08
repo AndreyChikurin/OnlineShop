@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net.Mail;
     using Domain.Models;
 
     public class DbGenerator
@@ -155,6 +156,18 @@
                 },
             };
 
+            List<User> users = new ()
+            {
+                new User()
+                {
+                    Id = Guid.NewGuid(),
+                    Email = "Hrago@mail.ru",
+                    Password = "123456",
+                    Role = "Admin",
+                },
+            };
+
+            databaseContext.Users.AddRange(users);
             databaseContext.Categories.AddRange(categories);
             databaseContext.Products.AddRange(products);
             databaseContext.SaveChanges();
