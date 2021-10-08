@@ -27,8 +27,8 @@
             Controllers.ProductsController productsController = controllerFactory.CreateProductsController();
 
             // Act
-            var result = productsController.Get();
-            var successResult = result.Result as OkObjectResult;
+            var result = productsController.GetProducts();
+            var successResult = result as OkObjectResult;
             var listOfProducts = successResult.Value as List<ProductDto>;
 
             // Assert

@@ -17,7 +17,7 @@ namespace WebAPI.MockFactory.Tests.Factory
 
         public ProductsController CreateProductsController()
         {
-            return new ProductsController(_loggerFactory.CreateLogger<ProductsController>(), _serviceFactory.CreateProductService());
+            return null;
         }
     }
 }
