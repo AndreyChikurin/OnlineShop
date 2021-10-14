@@ -1,0 +1,14 @@
+.width500 {
+    width: 500px;
+  }
+
+  .adminButton {
+    size: large;
+    width: 350px;
+  }
+  
+  .saveButton {
+    margin-top: -35px;
+    justify-content: right;
+    display: flex;
+  }
