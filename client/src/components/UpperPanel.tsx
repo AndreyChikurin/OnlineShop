@@ -81,7 +81,7 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: prop => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
@@ -106,224 +106,228 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const UpperPanel = observer(() => {
-  
-    const {user} = useContext(Context)
-    const history = useHistory()
-        
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-        React.useState<null | HTMLElement>(null);
+  const { user } = useContext(Context);
+  const history = useHistory();
 
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
-    const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
-    };
+  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
-    };
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
 
-    const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setMobileMoreAnchorEl(event.currentTarget);
-    };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
 
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
-    const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-        <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-        }}
-        id={menuId}
-        keepMounted
-        transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-        }}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'left',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <ButtonGroup orientation="vertical" aria-label="vertical outlined button group">
+        {user.isAuth ? (
+          <>
+            <Button variant="outlined" onClick={() => history.push(BASKET_ROUTE)}>
+              Basket
+            </Button>
+            <Button variant="outlined" onClick={() => history.push(LOGIN_ROUTE) + user.setIsAuth(false)}>
+              Exit
+            </Button>
+            <Button variant="outlined" onClick={() => history.push(ADMIN_ROUTE)}>
+              Admin panel
+            </Button>
+          </>
+        ) : (
+          <Button variant="outlined" onClick={() => user.setIsAuth(true)}>
+            Authorization
+          </Button>
+        )}
+      </ButtonGroup>
+    </Menu>
+  );
+
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
         >
-            <ButtonGroup
-            orientation="vertical"
-            aria-label="vertical outlined button group"
-            >
-                {user.isAuth ?
-                                <>
-                                <Button variant="outlined" onClick={() => history.push(BASKET_ROUTE)} >Basket</Button>
-                                <Button variant="outlined" onClick={() => (history.push(LOGIN_ROUTE) + user.setIsAuth(false))}>Exit</Button>
-                                <Button variant="outlined" onClick={() => history.push(ADMIN_ROUTE)}>Admin panel</Button>
-                                </>
-                            :
-                                <Button variant="outlined" onClick={() => user.setIsAuth(true)}>Authorization</Button>
-                }
-            </ButtonGroup>
-        </Menu>
-    );
+          <AccountCircle />
+        </IconButton>
+      </MenuItem>
+    </Menu>
+  );
 
-    const mobileMenuId = 'primary-search-account-menu-mobile';
-    const renderMobileMenu = (
-        <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-        }}
-        id={mobileMenuId}
-        keepMounted
-        transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-        }}
-        open={isMobileMenuOpen}
-        onClose={handleMobileMenuClose}
-        >
-        <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
+  const service: Service = new Service();
+
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function get() {
+      const cat = await service.getCategories();
+      setCategories(cat);
+    }
+    get();
+  }, []);
+
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" open={open} style={{ background: '#DAA520', color: 'black' }}>
+        <Toolbar>
+          <IconButton
             color="inherit"
-            >
-            <AccountCircle />
-            </IconButton>
-        </MenuItem>
-        </Menu>
-    );
-    
-    
-    const service: Service = new Service();
-
-    const [categories, setCategories] = useState<Category[]>([]);
-
-    useEffect(() => {async function get() {
-            const cat = await service.getCategories();
-            setCategories(cat);
-    }; get()
-    }, []);
-
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" open={open} style={{background: "#DAA520", color: "black"}}>
-            <Toolbar>
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div" sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <NavLink style={{ color: 'black', textDecoration: 'none' }} to={SHOP_ROUTE}>
+              WatchShop
+            </NavLink>
+          </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+          </Search>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{ mr: 2, ...(open && { display: 'none' }) }}
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
             >
-                <MenuIcon />
+              <AccountCircle />
             </IconButton>
-            <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ display: { xs: 'none', sm: 'block' } }}
-            >
-                <NavLink style={{color:'black', textDecoration:'none'}}to={SHOP_ROUTE}>WatchShop</NavLink>
-            </Typography>
-            <Search>
-                <SearchIconWrapper>
-                <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-                />
-            </Search>
-            <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>            
-                <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-                >
-                <AccountCircle />
-                </IconButton>
-            </Box>
-            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-                >
-                </IconButton>
-            </Box>
-            </Toolbar>
-        </AppBar>
-        <Drawer
-            sx={{
+          </Box>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            ></IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
             width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-                width: drawerWidth,
-                boxSizing: 'border-box',
-            },
-            }}
-            variant="persistent"
-            anchor="left"
-            open={open}
-        >
-            <DrawerHeader>
-                <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                </IconButton>
-            </DrawerHeader>
-            <Divider />
-            <List>
-                <Grid container spacing={-1} justifyContent="center">Categiries</Grid>
-                {categories.map(value => (console.log(categories),
-                    <ListItem button key={value.id} onClick={() => history.push(FILTER_ROUTE + '/' + value.id)}>
-                        <ListItemIcon>
-                            <FilterAltIcon /> 
-                        </ListItemIcon>
-                        <ListItemText primary={value.name} />
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-            <List>
-            <Grid container spacing={-1} justifyContent="center">Sort by </Grid>
-            {['Decreasing price', 'Increasing price', 'Rating'].map((text, index) => (
-                <ListItem button key={text}>
-                <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="persistent"
+        anchor="left"
+        open={open}
+      >
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          <Grid container spacing={-1} justifyContent="center">
+            Categiries
+          </Grid>
+          {categories.map(
+            value => (
+              console.log(categories),
+              (
+                <ListItem button key={value.id} onClick={() => history.push(FILTER_ROUTE + '/' + value.id)}>
+                  <ListItemIcon>
+                    <FilterAltIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={value.name} />
                 </ListItem>
-            ))}
-            </List>
-        </Drawer>
-        {renderMobileMenu}
-        {renderMenu}
-        </Box>
-    );
+              )
+            ),
+          )}
+        </List>
+        <Divider />
+        <List>
+          <Grid container spacing={-1} justifyContent="center">
+            Sort by{' '}
+          </Grid>
+          {['Decreasing price', 'Increasing price', 'Rating'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      {renderMobileMenu}
+      {renderMenu}
+    </Box>
+  );
 });
 export default UpperPanel;

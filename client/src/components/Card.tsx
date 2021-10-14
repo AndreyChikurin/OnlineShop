@@ -15,24 +15,23 @@ export default function MediaCard(props?: any) {
   return (
     <Card sx={{ minWidth: 250, minHeight: 430, maxWidth: 250, maxHeight: 430 }}>
       <CardActionArea>
-        <CardMedia 
-            sx={{ minWidth: 250, minHeight: 250, maxWidth: 250, maxHeight: 250 }}
-            component="img"
-            image={props.product.img}
+        <CardMedia
+          sx={{ minWidth: 250, minHeight: 250, maxWidth: 250, maxHeight: 250 }}
+          component="img"
+          image={props.product.img}
         />
-        <CardContent >
-            <Typography gutterBottom variant="h5" component="div" sx={{ minHeight: 70, maxHeight: 70 }}>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div" sx={{ minHeight: 70, maxHeight: 70 }}>
             {props.product.name}
-            </Typography>
-            <Typography variant="body1" color="black" >
+          </Typography>
+          <Typography variant="body1" color="black">
             {props.product.price}$
-            </Typography>
+          </Typography>
         </CardContent>
-      </CardActionArea>  
-        <CardActions>
-            <Button size="small">Learn More</Button>
-        </CardActions>
-      
+      </CardActionArea>
+      <CardActions>
+        <Button size="small">Learn More</Button>
+      </CardActions>
     </Card>
   );
 }

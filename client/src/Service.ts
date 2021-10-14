@@ -1,7 +1,7 @@
 export class Service {
   async getProducts() {
     try {
-      const response = await fetch('https://localhost:44380/api/Products');
+      const response = await fetch('/api/Products');
       const productData = await response.json();
       return productData;
     } catch (error) {
@@ -21,7 +21,7 @@ export class Service {
   
   async getCategories() {
     try {
-      const ans = await fetch('https://localhost:44380/api/Categories');
+      const ans = await fetch('/api/Categories');
       const categoryData = await ans.json();
       return categoryData;
     } catch (error) {
