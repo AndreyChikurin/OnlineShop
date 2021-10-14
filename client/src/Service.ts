@@ -43,7 +43,7 @@ export class Service {
       };
       const response = await fetch(API_PRODUCTS, reqOptions);
       const result = await response.json();
-      return result.id;
+      return result;
     } catch (error) {
       throw Error('Failed to save the product');
     }
