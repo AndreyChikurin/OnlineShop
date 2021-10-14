@@ -8,7 +8,7 @@ import { NewProduct } from '../../models/Product';
 import { Service } from '../../Service';
 import ListProducts from '../ListProducts';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
-import { styles } from './Styles'
+import { styles } from './Styles';
 import './AdminPanel.css';
 
 const ChangeProduct = () => {

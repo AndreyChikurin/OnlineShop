@@ -1,0 +1,15 @@
+.authFormControl {
+    margin-top: 7px;
+    margin-left: 7px;
+    margin-bottom: 7px;
+    margin-right: 7px;
+    justify-content: center;
+    display: flex;
+    height: 30px;
+    width: 566px;
+}
+
+.centerFlex {
+    justify-content: center;
+    display: flex;
+}

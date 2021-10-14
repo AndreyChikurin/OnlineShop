@@ -7,7 +7,7 @@ import { Grid, MenuItem, TextField, Typography } from '@mui/material';
 import { NewProduct } from 'src/models/Product';
 import { Service } from 'src/Service';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { styles } from './Styles'
+import { styles } from './Styles';
 import './AdminPanel.css';
 
 const AddProduct = () => {

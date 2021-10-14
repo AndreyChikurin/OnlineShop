@@ -19,3 +19,4 @@ const ListCategories = () => {
 };
 
 export default ListCategories;
+
