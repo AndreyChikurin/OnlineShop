@@ -8,7 +8,7 @@ import { Service } from 'src/Service';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { styles } from './Styles';
 import './AdminPanel.css';
-import TextFields from './TextFieldsForProduct';
+import ProductCopmonent from './ProductCopmonent';
 
 const AddProduct = () => {
   const [open, setOpen] = useState(false);
@@ -47,7 +47,7 @@ const AddProduct = () => {
             <Typography gutterBottom variant="h5" component="div">
               Add a product
             </Typography>
-            <TextFields
+            <ProductCopmonent
               name={name}
               price={price}
               imgUrl={imgUrl}

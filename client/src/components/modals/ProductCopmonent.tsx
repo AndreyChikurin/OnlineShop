@@ -16,7 +16,7 @@ type Prop ={
     setCategoryTypeId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function TextFields({ name, setName,price, setPrice,imgUrl, setImgUrl,quantity, setQuantity,categoryTypeId, setCategoryTypeId }: Prop) {
+export default function ProductCopmonent({ name, setName,price, setPrice,imgUrl, setImgUrl,quantity, setQuantity,categoryTypeId, setCategoryTypeId }: Prop) {
 
  return(
     <Grid container direction={'column'} spacing={3}>
