@@ -1,5 +1,5 @@
 import { NewProduct } from './models/Product';
-import { API_CATEGORIES, API_PRODUCTS } from './utils/consts';
+import { API_CATEGORIES, API_PRODUCTS, SERVER } from './utils/consts';
 
 export class Service {
   async getProducts() {
@@ -41,7 +41,8 @@ export class Service {
           'Content-Type': 'application/json',
         },
       };
-      const response = await fetch(API_PRODUCTS, reqOptions);
+      console.log(reqOptions.body)
+      const response = await fetch(SERVER + API_PRODUCTS, reqOptions);
       const result = await response.json();
       return result.id;
     } catch (error) {
@@ -54,7 +55,7 @@ export class Service {
       const reqOptions = {
         method: 'DELETE',
       };
-      const response = await fetch(API_PRODUCTS + '/' + id, reqOptions);
+      const response = await fetch(SERVER + API_PRODUCTS + '/' + id, reqOptions);
       return response;
     } catch (error) {
       throw Error('Failed to delete the product');
@@ -70,7 +71,7 @@ export class Service {
           'Content-Type': 'application/json',
         },
       };
-      const response = await fetch(API_PRODUCTS, reqOptions);
+      const response = await fetch(SERVER + API_PRODUCTS, reqOptions);
       const result = await response.json();
       return result;
     } catch (error) {

@@ -2,7 +2,7 @@ export class Product {
   constructor(
     public name: string,
     public price: number,
-    public img: string,
+    public imgUrl: string,
     public quantity: number,
     public categoryType: {
       name: string,
@@ -17,7 +17,7 @@ export class NewProduct {
   constructor(
     public name: string,
     public price: number,
-    public img: string,
+    public imgUrl: string,
     public quantity: number,
     public categoryTypeId: string,
     public id?: string,

@@ -47,7 +47,7 @@ namespace WebApi.Migrations
                     b.Property<Guid?>("CategoryTypeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Img")
+                    b.Property<string>("ImgUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

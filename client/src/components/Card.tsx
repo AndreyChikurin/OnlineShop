@@ -18,7 +18,7 @@ export default function MediaCard(props?: any) {
         <CardMedia
           sx={{ minWidth: 250, minHeight: 250, maxWidth: 250, maxHeight: 250 }}
           component="img"
-          image={props.product.img}
+          image={props.product.imgUrl}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" sx={{ minHeight: 70, maxHeight: 70 }}>
