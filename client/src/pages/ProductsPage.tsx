@@ -38,7 +38,7 @@ const ProductsPage = () => {
               marginLeft: 20,
             }}
           >
-            <Image width={500} height={500} src={product?.img} />
+            <Image width={500} height={500} src={product?.imgUrl} />
           </Card>
         </Col>
         <Col style={{ marginLeft: 20 }}>

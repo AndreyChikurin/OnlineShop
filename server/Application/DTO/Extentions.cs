@@ -14,7 +14,7 @@
                 Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
-                Img = product.Img,
+                ImgUrl = product.ImgUrl,
                 Quantity = product.Quantity,
                 CategoryType = product.CategoryType.AsDto(),
             };
@@ -47,7 +47,7 @@
                 Id = Guid.NewGuid(),
                 Name = productDto.Name,
                 Price = productDto.Price,
-                Img = productDto.Img,
+                ImgUrl = productDto.ImgUrl,
                 Quantity = productDto.Quantity,
                 CategoryType = productDto.CategoryType.AsEntity(),
             };
@@ -59,7 +59,7 @@
             {
                 Name = productDto.Name,
                 Price = productDto.Price,
-                Img = productDto.Img,
+                ImgUrl = productDto.ImgUrl,
                 Quantity = productDto.Quantity,
             };
         }
@@ -71,7 +71,7 @@
                 Id = productDto.Id,
                 Name = productDto.Name,
                 Price = productDto.Price,
-                Img = productDto.Img,
+                ImgUrl = productDto.ImgUrl,
                 Quantity = productDto.Quantity,
             };
         }
