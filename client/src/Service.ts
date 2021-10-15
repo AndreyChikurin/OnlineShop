@@ -1,3 +1,4 @@
+import { NewCategory } from './models/Category';
 import { NewProduct } from './models/Product';
 import { API_CATEGORIES, API_PRODUCTS, SERVER } from './utils/consts';
 
@@ -76,6 +77,54 @@ export class Service {
       return result;
     } catch (error) {
       throw Error('Failed to put the product');
+    }
+  }
+
+  async saveCategory(category: NewCategory) {
+    try {
+      const reqOptions = {
+        method: 'POST',
+        body: JSON.stringify(category),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      console.log(reqOptions);
+      const response = await fetch(SERVER + API_CATEGORIES, reqOptions);
+      const result = await response.json();
+      return result.id;
+    } catch (error) {
+      throw Error('Failed to save the category');
+    }
+  }
+
+  async putCategory(category: NewCategory) {
+    try {
+      const reqOptions = {
+        method: 'PUT',
+        body: JSON.stringify(category),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      const response = await fetch(SERVER + API_CATEGORIES, reqOptions);
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      throw Error('Failed to change the category');
+    }
+  }
+
+  async deleteCategory(id: string) {
+    try {
+      const reqOptions = {
+        method: 'DELETE',
+      };
+      console.log(reqOptions);
+      const response = await fetch(SERVER + API_CATEGORIES + '/' + id, reqOptions);
+      return response;
+    } catch (error) {
+      throw Error('Failed to delete the category');
     }
   }
 }
