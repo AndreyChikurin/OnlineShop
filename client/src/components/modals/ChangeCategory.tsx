@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import ListCategories from '../ListCategories';
 import { Grid, MenuItem, TextField, Typography } from '@mui/material';
 import { Service } from '../../Service';
-import { NewCategory } from '../../models/Category';
+import { Category } from '../../models/Category';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
 import { styles } from './Styles';
 import './AdminPanel.css';
@@ -33,7 +33,7 @@ const ChangeCategory = () => {
     setDescription: setDescription,
   };
 
-  const putCategory = new NewCategory(name, description, id);
+  const putCategory = new Category(name, description, id);
   console.log(putCategory);
 
   return (

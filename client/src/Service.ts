@@ -1,4 +1,4 @@
-import { NewCategory } from './models/Category';
+import { Category } from './models/Category';
 import { NewProduct } from './models/Product';
 import { API_CATEGORIES, API_PRODUCTS, SERVER } from './utils/consts';
 
@@ -80,7 +80,7 @@ export class Service {
     }
   }
 
-  async saveCategory(category: NewCategory) {
+  async saveCategory(category: Category) {
     try {
       const reqOptions = {
         method: 'POST',
@@ -98,7 +98,7 @@ export class Service {
     }
   }
 
-  async putCategory(category: NewCategory) {
+  async putCategory(category: Category) {
     try {
       const reqOptions = {
         method: 'PUT',

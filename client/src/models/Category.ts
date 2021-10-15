@@ -2,14 +2,6 @@ export class Category {
     constructor(
       public name: string,
       public description: string,
-      public id: string,
-    ) {}
-  }
-
-  export class NewCategory {
-    constructor(
-      public name: string,
-      public description: string,
       public id?: string,
     ) {}
   }
