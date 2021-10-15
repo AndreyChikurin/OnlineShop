@@ -9,7 +9,7 @@ import ListProducts from '../ListProducts';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
 import { styles } from './Styles';
 import './AdminPanel.css';
-import ProductCopmonent from './ProductCopmonent';
+import ProductComponent from './ProductComponent';
 
 const ChangeProduct = () => {
   const [open, setOpen] = useState(false);
@@ -68,7 +68,7 @@ const ChangeProduct = () => {
                 </TextField>
               </Grid>
               <Grid item >
-                <ProductCopmonent
+                <ProductComponent
                   name={name}
                   price={price}
                   imgUrl={imgUrl}
