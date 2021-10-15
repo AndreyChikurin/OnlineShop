@@ -2,7 +2,7 @@
 import ListCategories from '../ListCategories';
 import { Grid, MenuItem, TextField} from '@mui/material';
 import './AdminPanel.css';
-import { IWatch } from './Interfaces';
+import { IWatch } from '../Interfaces/IWatch';
 
 export default function ProductComponent(props: IWatch) {
 
