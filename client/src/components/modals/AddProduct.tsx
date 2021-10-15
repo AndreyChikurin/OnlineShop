@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import ListCategories from '../ListCategories';
 import { Grid, MenuItem, TextField, Typography } from '@mui/material';
 import { NewProduct } from 'src/models/Product';
 import { Service } from 'src/Service';
@@ -24,11 +23,11 @@ const AddProduct = () => {
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
-  const [img, setImg] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
   const [quantity, setQuantity] = useState(0);
   const [categoryTypeId, setCategoryTypeId] = useState('');
 
-  const newProduct = new NewProduct(name, price, img, quantity, categoryTypeId);
+  const newProduct = new NewProduct(name, price, imgUrl, quantity, categoryTypeId);
   console.log(newProduct);
   return (
     <div>
@@ -51,12 +50,12 @@ const AddProduct = () => {
             <TextFields
               name={name}
               price={price}
-              img={img}
+              imgUrl={imgUrl}
               quantity={quantity}
               categoryTypeId={categoryTypeId}
               setName={setName}
               setPrice={setPrice}
-              setImg={setImg}
+              setImgUrl={setImgUrl}
               setQuantity={setQuantity}
               setCategoryTypeId={setCategoryTypeId}
             />

@@ -6,17 +6,17 @@ import './AdminPanel.css';
 type Prop ={
     name: string;
     price: number;
-    img: string;
+    imgUrl: string;
     quantity: number;
     categoryTypeId: string;
-    setName: any;
-    setPrice: any;
-    setImg: any;
-    setQuantity: any;
-    setCategoryTypeId: any;
+    setName: React.Dispatch<React.SetStateAction<string>>;
+    setPrice: React.Dispatch<React.SetStateAction<number>>;
+    setImgUrl: React.Dispatch<React.SetStateAction<string>>;
+    setQuantity: React.Dispatch<React.SetStateAction<number>>;
+    setCategoryTypeId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function TextFields({ name, setName,price, setPrice,img, setImg,quantity, setQuantity,categoryTypeId, setCategoryTypeId }: Prop) {
+export default function TextFields({ name, setName,price, setPrice,imgUrl, setImgUrl,quantity, setQuantity,categoryTypeId, setCategoryTypeId }: Prop) {
 
  return(
     <Grid container direction={'column'} spacing={3}>
@@ -69,8 +69,8 @@ export default function TextFields({ name, setName,price, setPrice,img, setImg,q
           label="Img"
           defaultValue="Image"
           variant="outlined"
-          value={img}
-          onChange={e => setImg(e.target.value)}
+          value={imgUrl}
+          onChange={e => setImgUrl(e.target.value)}
           className="width500"
         />
       </Grid>

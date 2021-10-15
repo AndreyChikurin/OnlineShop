@@ -12,7 +12,7 @@
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
-        public string Img { get; set; }
+        public string ImgUrl { get; set; }
 
         public int Quantity { get; set; }
 

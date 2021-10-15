@@ -12,7 +12,7 @@
         [Range(1, 100000)]
         public decimal Price { get; set; }
 
-        public string Img { get; set; }
+        public string ImgUrl { get; set; }
 
         [Required]
         [Range(1, 100000)]
