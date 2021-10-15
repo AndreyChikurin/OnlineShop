@@ -29,8 +29,22 @@ const ChangeProduct = () => {
   const [quantity, setQuantity] = useState(0);
   const [categoryTypeId, setCategoryTypeId] = useState('');
 
+  const watch={
+    name: name,
+    price: price,
+    imgUrl: imgUrl,
+    quantity: quantity,
+    categoryTypeId: categoryTypeId,
+    setName: setName,
+    setPrice: setPrice,
+    setImgUrl: setImgUrl,
+    setQuantity: setQuantity,
+    setCategoryTypeId: setCategoryTypeId,
+  }
+
   const putProduct = new NewProduct(name, price, imgUrl, quantity, categoryTypeId, id);
-  console.log(putProduct);
+  console.log(putProduct);               
+
   return (
     <div>
       <Button
@@ -69,16 +83,7 @@ const ChangeProduct = () => {
               </Grid>
               <Grid item >
                 <ProductComponent
-                  name={name}
-                  price={price}
-                  imgUrl={imgUrl}
-                  quantity={quantity}
-                  categoryTypeId={categoryTypeId}
-                  setName={setName}
-                  setPrice={setPrice}
-                  setImgUrl={setImgUrl}
-                  setQuantity={setQuantity}
-                  setCategoryTypeId={setCategoryTypeId}
+                  watch={watch}
                 />
               </Grid>
               <Grid item>

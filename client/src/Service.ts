@@ -41,6 +41,7 @@ export class Service {
           'Content-Type': 'application/json',
         },
       };
+      console.log(reqOptions.body)
       const response = await fetch(SERVER + API_PRODUCTS, reqOptions);
       const result = await response.json();
       return result.id;

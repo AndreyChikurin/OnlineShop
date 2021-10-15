@@ -3,7 +3,7 @@ import ListCategories from '../ListCategories';
 import { Grid, MenuItem, TextField} from '@mui/material';
 import './AdminPanel.css';
 
-type Prop ={
+type Watch ={
     name: string;
     price: number;
     imgUrl: string;
@@ -16,7 +16,11 @@ type Prop ={
     setCategoryTypeId: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function ProductComponent({ name, setName,price, setPrice,imgUrl, setImgUrl,quantity, setQuantity,categoryTypeId, setCategoryTypeId }: Prop) {
+interface Prop {
+  watch:Watch
+}
+
+export default function ProductComponent(props: Prop) {
 
  return(
     <Grid container direction={'column'} spacing={3}>
@@ -25,8 +29,8 @@ export default function ProductComponent({ name, setName,price, setPrice,imgUrl,
           required
           label="Name"
           variant="outlined"
-          value={name}
-          onChange={e => setName(e.target.value)}
+          value={props.watch.name}
+          onChange={e => props.watch.setName(e.target.value)}
           inputProps={{ maxLength: 50 }}
           className="width500"
         />
@@ -36,8 +40,8 @@ export default function ProductComponent({ name, setName,price, setPrice,imgUrl,
           required
           label="Price, $"
           variant="outlined"
-          value={price}
-          onChange={e => setPrice(Number(e.target.value))}
+          value={props.watch.price}
+          onChange={e => props.watch.setPrice(Number(e.target.value))}
           type="number"
           InputProps={{
             inputProps: {
@@ -53,8 +57,8 @@ export default function ProductComponent({ name, setName,price, setPrice,imgUrl,
           label="Quantity"
           variant="outlined"
           type="number"
-          value={quantity}
-          onChange={e => setQuantity(Number(e.target.value))}
+          value={props.watch.quantity}
+          onChange={e => props.watch.setQuantity(Number(e.target.value))}
           InputProps={{
             inputProps: {
               min: 1,
@@ -69,8 +73,8 @@ export default function ProductComponent({ name, setName,price, setPrice,imgUrl,
           label="Img"
           defaultValue="Image"
           variant="outlined"
-          value={imgUrl}
-          onChange={e => setImgUrl(e.target.value)}
+          value={props.watch.imgUrl}
+          onChange={e => props.watch.setImgUrl(e.target.value)}
           className="width500"
         />
       </Grid>
@@ -79,8 +83,8 @@ export default function ProductComponent({ name, setName,price, setPrice,imgUrl,
           required
           select
           label="Select"
-          value={categoryTypeId}
-          onChange={e => setCategoryTypeId(e.target.value)}
+          value={props.watch.categoryTypeId}
+          onChange={e => props.watch.setCategoryTypeId(e.target.value)}
           helperText="Please select a category"
           className="width500"
         >

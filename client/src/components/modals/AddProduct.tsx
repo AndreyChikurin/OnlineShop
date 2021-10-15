@@ -27,8 +27,22 @@ const AddProduct = () => {
   const [quantity, setQuantity] = useState(0);
   const [categoryTypeId, setCategoryTypeId] = useState('');
 
+  const watch={
+    name: name,
+    price: price,
+    imgUrl: imgUrl,
+    quantity: quantity,
+    categoryTypeId: categoryTypeId,
+    setName: setName,
+    setPrice: setPrice,
+    setImgUrl: setImgUrl,
+    setQuantity: setQuantity,
+    setCategoryTypeId: setCategoryTypeId,
+  }
+
   const newProduct = new NewProduct(name, price, imgUrl, quantity, categoryTypeId);
-  console.log(newProduct);
+  console.log(newProduct);              
+
   return (
     <div>
       <Button
@@ -48,16 +62,7 @@ const AddProduct = () => {
               Add a product
             </Typography>
             <ProductComponent
-              name={name}
-              price={price}
-              imgUrl={imgUrl}
-              quantity={quantity}
-              categoryTypeId={categoryTypeId}
-              setName={setName}
-              setPrice={setPrice}
-              setImgUrl={setImgUrl}
-              setQuantity={setQuantity}
-              setCategoryTypeId={setCategoryTypeId}
+              watch={watch}
             />
             <Grid container direction={'column'} spacing={3}>
               <Grid item>
