@@ -10,6 +10,7 @@ import ListProducts from '../ListProducts';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
 import { styles } from './Styles';
 import './AdminPanel.css';
+import TextFields from './TextFieldsForProduct';
 
 const ChangeProduct = () => {
   const [open, setOpen] = useState(false);
@@ -67,76 +68,19 @@ const ChangeProduct = () => {
                   ))}
                 </TextField>
               </Grid>
-              <Grid item>
-                <TextField
-                  required
-                  label="Name"
-                  variant="outlined"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  inputProps={{ maxLength: 50 }}
-                  className="width500"
+              <Grid item >
+                <TextFields
+                  name={name}
+                  price={price}
+                  img={img}
+                  quantity={quantity}
+                  categoryTypeId={categoryTypeId}
+                  setName={setName}
+                  setPrice={setPrice}
+                  setImg={setImg}
+                  setQuantity={setQuantity}
+                  setCategoryTypeId={setCategoryTypeId}
                 />
-              </Grid>
-              <Grid item>
-                <TextField
-                  required
-                  label="Price, $"
-                  variant="outlined"
-                  value={price}
-                  onChange={e => setPrice(Number(e.target.value))}
-                  type="number"
-                  InputProps={{
-                    inputProps: {
-                      min: 1,
-                    },
-                  }}
-                  className="width500"
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  required
-                  label="Quantity"
-                  variant="outlined"
-                  type="number"
-                  value={quantity}
-                  onChange={e => setQuantity(Number(e.target.value))}
-                  InputProps={{
-                    inputProps: {
-                      min: 1,
-                    },
-                  }}
-                  className="width500"
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  required
-                  label="Img"
-                  defaultValue="Image"
-                  variant="outlined"
-                  value={img}
-                  onChange={e => setImg(e.target.value)}
-                  className="width500"
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  required
-                  select
-                  label="Select a category"
-                  value={categoryTypeId}
-                  onChange={e => setCategoryTypeId(e.target.value)}
-                  helperText="Please select a category"
-                  className="width500"
-                >
-                  {ListCategories().map(category => (
-                    <MenuItem key={category.id} value={category.id}>
-                      {category.name}
-                    </MenuItem>
-                  ))}
-                </TextField>
               </Grid>
               <Grid item>
                 <Button variant="contained" type="submit">
