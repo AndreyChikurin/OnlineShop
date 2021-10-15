@@ -2,25 +2,9 @@
 import ListCategories from '../ListCategories';
 import { Grid, MenuItem, TextField} from '@mui/material';
 import './AdminPanel.css';
+import { IWatch } from './Styles';
 
-type Watch ={
-    name: string;
-    price: number;
-    imgUrl: string;
-    quantity: number;
-    categoryTypeId: string;
-    setName: React.Dispatch<React.SetStateAction<string>>;
-    setPrice: React.Dispatch<React.SetStateAction<number>>;
-    setImgUrl: React.Dispatch<React.SetStateAction<string>>;
-    setQuantity: React.Dispatch<React.SetStateAction<number>>;
-    setCategoryTypeId: React.Dispatch<React.SetStateAction<string>>;
-}
-
-interface Prop {
-  watch:Watch
-}
-
-export default function ProductComponent(props: Prop) {
+export default function ProductComponent(props: IWatch) {
 
  return(
     <Grid container direction={'column'} spacing={3}>
