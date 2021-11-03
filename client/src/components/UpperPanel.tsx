@@ -296,7 +296,7 @@ const UpperPanel = observer(() => {
         <Divider />
         <List>
           <Grid container spacing={-1} justifyContent="center">
-            Categiries
+            Categories
           </Grid>
           {categories.map(
             value => (

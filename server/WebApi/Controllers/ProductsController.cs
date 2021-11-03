@@ -56,7 +56,7 @@
             ProductDto product = productDto.AsDto();
             product.CategoryType = exsistingGategory;
             productService.AddProduct(product);
-            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+            return Ok(product);
         }
 
         [HttpPut]
@@ -80,7 +80,7 @@
             product.CategoryType = exsistingGategory;
 
             productService.EditProduct(product);
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -94,7 +94,7 @@
             }
 
             productService.DeleteProduct(id);
-            return NoContent();
+            return Ok();
         }
     }
 }

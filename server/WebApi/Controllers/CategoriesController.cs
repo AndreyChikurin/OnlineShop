@@ -47,7 +47,7 @@
         {
             var category = categoryDto.AsDto();
             categoryService.AddCategory(category);
-            return CreatedAtAction(nameof(GetCategories), new { id = category.Id }, category);
+            return Ok(category);
         }
 
         [HttpPut]
@@ -61,7 +61,7 @@
             }
 
             categoryService.EditCategory(categoryDto);
-            return NoContent();
+            return Ok(categoryDto);
         }
 
         [HttpDelete("{id}")]
@@ -79,7 +79,7 @@
             if (categoryProducts.Count() == 0)
             {
                 categoryService.DeleteCategory(id);
-                return NoContent();
+                return Ok();
             }
 
             return Conflict();
