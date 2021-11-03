@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Col, Container,Image, Row } from 'react-bootstrap';
-import { Button, Card, Grid} from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Grid} from '@mui/material';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { Service } from '../Service';
 import { Product } from '../models/Product';
@@ -26,7 +25,7 @@ const Filtering = () => {
         const prod = await service.getProducts();
         setProducts(prod);
     }; get()
-    }, []);
+    }, [service]);
 
 console.log(products)
   return (

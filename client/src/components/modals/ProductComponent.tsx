@@ -1,4 +1,3 @@
-
 import ListCategories from '../ListCategories';
 import { Grid, MenuItem, TextField} from '@mui/material';
 import './AdminPanel.css';

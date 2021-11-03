@@ -29,7 +29,6 @@ import { useContext, useEffect, useState } from 'react';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { Service } from 'src/Service';
 import { Category } from 'src/models/Category';

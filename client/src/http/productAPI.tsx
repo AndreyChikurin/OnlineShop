@@ -1,4 +1,4 @@
-import {$authHost, $host} from './index'
+import {$host} from './index'
 
 export const createCategory = async (categoty: any) => {
     const {data} = await $host.post('api/cateries', categoty)

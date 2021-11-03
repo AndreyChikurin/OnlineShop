@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Context } from '../index';
 import { authRoutes, publicRoutes } from 'src/routes';

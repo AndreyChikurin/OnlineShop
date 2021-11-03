@@ -12,7 +12,7 @@ const Shop = observer(() => {
   }, []);
   console.log(product);
   return (
-    <div style={{ marginTop: 12, marginLeft: 80, marginRight: 80 }}>
+    <div style={{ marginTop: 12,marginBottom: 80, marginLeft: 300, marginRight: 300 }}>
       <CardsGrid />
     </div>
   );

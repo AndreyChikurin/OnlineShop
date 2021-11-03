@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Col, Container, Image, Row } from 'react-bootstrap';
-import { Button, Card } from '@mui/material';
+import { Image } from 'react-bootstrap';
+import { Button, Card, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Service } from 'src/Service';
 import { Product } from 'src/models/Product';
@@ -22,9 +22,9 @@ const ProductsPage = () => {
   }, []);
 
   return (
-    <Container>
-      <Container style={{ marginTop: 20, marginLeft: 20, display: 'flex', justifyContent: 'center' }}>
-        <Col>
+    <Grid style={{ display: 'flex', justifyContent: 'center', margin: 20}}>
+      <Grid style={{ display: 'flex', justifyContent: 'center', background: '#DAA520',width: 860, height: 540 }}>
+        <>
           <Card
             style={{
               justifyContent: 'center',
@@ -35,47 +35,45 @@ const ProductsPage = () => {
               height: 500,
               fontSize: 32,
               border: 'lightgray',
-              marginLeft: 20,
+              marginTop: 20,
+              marginBottom: 20,
             }}
           >
             <Image width={500} height={500} src={product?.imgUrl} />
           </Card>
-        </Col>
-        <Col style={{ marginLeft: 20 }}>
-          <Row>
-            <h2>{product?.name}</h2>
-            <div>{product?.categoryType.name}</div>
-          </Row>
-        </Col>
-        <Col>
+        </>
+        <div style={{ marginLeft: 20, marginTop: 20,width: 300, height: 500}}>
+          <h2>{product?.name}</h2>
+          <h2>Available for order: {product?.quantity}</h2>
+          <h3
+            style={{ 
+              marginTop: 20,
+              display: 'flex',
+              justifyContent: 'center',
+              width: 300
+            }}>
+            {product?.categoryType.description}
+          </h3>
           <Card
             style={{
               display: 'flex',
               alignItems: 'center',
               width: 300,
-              height: 250,
+              height: 100,
               fontSize: 32,
               border: 'lightgray',
-              marginLeft: 20,
               flexDirection: 'column',
+              background: '#fffadd'
             }}
           >
-            <h5>Available for order: {product?.quantity}</h5>
             <div>{product?.price}$</div>
             <Button variant="outlined" color="success" style={{ marginTop: 14 }}>
               Add to basket
             </Button>
           </Card>
-        </Col>
-      </Container>
-      <Container
-        style={{ marginTop: 20, marginLeft: 20, alignItems: 'top', display: 'flex', justifyContent: 'center' }}
-      >
-        <Row>
-          <h3>{product?.categoryType.description}</h3>
-        </Row>
-      </Container>
-    </Container>
+        </div>
+      </Grid>
+    </Grid>
   );
 };
 
