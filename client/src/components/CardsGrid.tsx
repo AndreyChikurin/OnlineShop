@@ -5,7 +5,6 @@ import MediaCard from './Card';
 import { Product } from 'src/models/Product';
 import { useHistory } from 'react-router-dom';
 import { PRODUCT_ROUTE } from 'src/utils/consts';
-import { fetchCategories } from 'src/http/productAPI';
 
 export default function CardsGrid() {
   const history = useHistory();

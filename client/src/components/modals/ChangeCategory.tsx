@@ -34,7 +34,6 @@ const ChangeCategory = () => {
   };
 
   const putCategory = new Category(name, description, id);
-  console.log(putCategory);
 
   return (
     <div>

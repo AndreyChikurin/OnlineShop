@@ -11,14 +11,12 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
 import Drawer from '@mui/material/Drawer';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import { Grid } from '@material-ui/core';
@@ -29,10 +27,10 @@ import { useContext, useEffect, useState } from 'react';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { Service } from 'src/Service';
 import { Category } from 'src/models/Category';
+import '../components/modals/AdminPanel.css';
 
 const drawerWidth = 240;
 
@@ -160,25 +158,25 @@ const UpperPanel = observer(() => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <ButtonGroup orientation="vertical" aria-label="vertical outlined button group">
+      <div>
         {user.isAuth ? (
-          <>
-            <Button variant="outlined" onClick={() => history.push(BASKET_ROUTE)}>
+          <div className="upperPanelButton" style={{height:135, }}>
+            <Button className="upperPanelButton" variant="outlined" onClick={() => history.push(BASKET_ROUTE)}>
               Basket
             </Button>
-            <Button variant="outlined" onClick={() => history.push(LOGIN_ROUTE) + user.setIsAuth(false)}>
+            <Button className="upperPanelButton" variant="outlined" onClick={() => history.push(LOGIN_ROUTE) + user.setIsAuth(false)}>
               Exit
             </Button>
-            <Button variant="outlined" onClick={() => history.push(ADMIN_ROUTE)}>
+            <Button className="upperPanelButton" variant="outlined" onClick={() => history.push(ADMIN_ROUTE)}>
               Admin panel
             </Button>
-          </>
+          </div>
         ) : (
           <Button variant="outlined" onClick={() => user.setIsAuth(true)}>
             Authorization
           </Button>
         )}
-      </ButtonGroup>
+      </div>
     </Menu>
   );
 
@@ -296,11 +294,10 @@ const UpperPanel = observer(() => {
         <Divider />
         <List>
           <Grid container spacing={-1} justifyContent="center">
-            Categiries
+            Categories
           </Grid>
           {categories.map(
             value => (
-              console.log(categories),
               (
                 <ListItem button key={value.id} onClick={() => history.push(FILTER_ROUTE + '/' + value.id)}>
                   <ListItemIcon>
@@ -313,17 +310,6 @@ const UpperPanel = observer(() => {
           )}
         </List>
         <Divider />
-        <List>
-          <Grid container spacing={-1} justifyContent="center">
-            Sort by{' '}
-          </Grid>
-          {['Decreasing price', 'Increasing price', 'Rating'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
       {renderMobileMenu}
       {renderMenu}

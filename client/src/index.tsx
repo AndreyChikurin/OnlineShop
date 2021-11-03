@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import { createContext } from 'react';
 import ReactDOM from 'react-dom';
 
 import './index.css';
@@ -8,7 +8,6 @@ import UserStore from './store/UserStore';
 import ProductStore from './store/ProductStore';
 
 export const Context = createContext({} as any)
-console.log(process.env.REACT_APP_API_URL)
 
 ReactDOM.render(
     <Context.Provider value = {{

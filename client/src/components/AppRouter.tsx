@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Context } from '../index';
 import { authRoutes, publicRoutes } from 'src/routes';
@@ -7,7 +7,6 @@ import { SHOP_ROUTE } from 'src/utils/consts';
 const AppRouter = () => {
   const { user } = useContext(Context);
 
-  console.log(user);
   return (
     <Switch>
       <Route path="watch/:id"></Route>

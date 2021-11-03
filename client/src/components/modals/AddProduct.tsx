@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import { Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { NewProduct } from 'src/models/Product';
 import { Service } from 'src/Service';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -41,7 +41,6 @@ const AddProduct = () => {
   }
 
   const newProduct = new NewProduct(name, price, imgUrl, quantity, categoryTypeId);
-  console.log(newProduct);              
 
   return (
     <div>
