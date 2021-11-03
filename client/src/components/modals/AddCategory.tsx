@@ -32,7 +32,6 @@ const AddCategory = () => {
   };
 
   const newCategory = new Category(name, description);
-  console.log(newCategory);
 
   return (
     <div>

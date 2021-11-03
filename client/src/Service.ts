@@ -42,7 +42,6 @@ export class Service {
           'Content-Type': 'application/json',
         },
       };
-      console.log(reqOptions.body)
       const response = await fetch(SERVER + API_PRODUCTS, reqOptions);
       const result = await response.json();
       return result.id;
@@ -89,7 +88,6 @@ export class Service {
           'Content-Type': 'application/json',
         },
       };
-      console.log(reqOptions);
       const response = await fetch(SERVER + API_CATEGORIES, reqOptions);
       const result = await response.json();
       return result.id;
@@ -120,7 +118,6 @@ export class Service {
       const reqOptions = {
         method: 'DELETE',
       };
-      console.log(reqOptions);
       const response = await fetch(SERVER + API_CATEGORIES + '/' + id, reqOptions);
       return response;
     } catch (error) {

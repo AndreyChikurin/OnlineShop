@@ -1,7 +1,7 @@
 import { Typography, Toolbar, Container, AppBar } from '@mui/material';
 
 export const Footer = () => (
-  <AppBar position="fixed" style={{background: "#DAA520",marginTop:'48%'}}>
+  <AppBar position="fixed" style={{background: "#DAA520", top: '94vh', height : 60}}>
     <Container maxWidth="md">
       <Toolbar>
         <Typography variant="body2" color="black">

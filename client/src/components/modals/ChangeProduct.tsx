@@ -43,7 +43,6 @@ const ChangeProduct = () => {
   }
 
   const putProduct = new NewProduct(name, price, imgUrl, quantity, categoryTypeId, id);
-  console.log(putProduct);               
 
   return (
     <div>

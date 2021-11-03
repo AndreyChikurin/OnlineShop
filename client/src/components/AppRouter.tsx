@@ -7,7 +7,6 @@ import { SHOP_ROUTE } from 'src/utils/consts';
 const AppRouter = () => {
   const { user } = useContext(Context);
 
-  console.log(user);
   return (
     <Switch>
       <Route path="watch/:id"></Route>

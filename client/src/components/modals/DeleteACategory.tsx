@@ -22,7 +22,6 @@ const DeleteACategory = () => {
 
   const [id, setId] = useState('');
 
-  console.log(id);
   return (
     <div>
       <Button onClick={handleOpen} variant="outlined" startIcon={<DeleteIcon />} size="large" className="adminButton">

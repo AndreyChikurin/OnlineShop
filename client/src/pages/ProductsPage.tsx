@@ -7,7 +7,6 @@ import { Product } from 'src/models/Product';
 
 const ProductsPage = () => {
   const link: any = useParams();
-  console.log(link.id);
 
   const service: Service = new Service();
 
