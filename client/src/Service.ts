@@ -5,7 +5,7 @@ import { API_CATEGORIES, API_PRODUCTS, SERVER } from './utils/consts';
 export class Service {
   async getProducts() {
     try {
-      const response = await fetch(API_PRODUCTS);
+      const response = await fetch(SERVER + API_PRODUCTS);
       const productData = await response.json();
       return productData;
     } catch (error) {
@@ -15,7 +15,7 @@ export class Service {
 
   async getProduct(id: string) {
     try {
-      const response = await fetch(API_PRODUCTS + '/' + id);
+      const response = await fetch(SERVER + API_PRODUCTS + '/' + id);
       const productData = await response.json();
       return productData;
     } catch (error) {
@@ -25,7 +25,7 @@ export class Service {
 
   async getCategories() {
     try {
-      const ans = await fetch(API_CATEGORIES);
+      const ans = await fetch(SERVER + API_CATEGORIES);
       const categoryData = await ans.json();
       return categoryData;
     } catch (error) {

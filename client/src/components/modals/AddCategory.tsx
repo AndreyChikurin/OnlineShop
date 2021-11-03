@@ -8,7 +8,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { styles } from './Styles';
 import './AdminPanel.css';
 import CategoryComponent from './CategoryComponent';
-import { NewCategory } from 'src/models/Category';
+import { Category } from 'src/models/Category';
 
 const AddCategory = () => {
   const [open, setOpen] = useState(false);
@@ -31,7 +31,7 @@ const AddCategory = () => {
     setDescription: setDescription,
   };
 
-  const newCategory = new NewCategory(name, description);
+  const newCategory = new Category(name, description);
   console.log(newCategory);
 
   return (
