@@ -7,21 +7,16 @@ import './PagesStyle.css';
 import AddCategory from 'src/components/modals/AddCategory';
 import ChangeCategory from 'src/components/modals/ChangeCategory';
 import DeleteACategory from 'src/components/modals/DeleteACategory';
+import ProductTable from 'src/components/modals/AdminTableProduct';
 
 const Admin = () => {
   return (
-    <Grid className='adminGrid'>
-      <Grid container direction="column" className="centerFlex">
-        <AddProduct></AddProduct>
-        <ChangeProduct></ChangeProduct>
-        <DeleteAProduct></DeleteAProduct>
+      <Grid className='adminGrid'>
+        <Grid container direction="column" className="centerFlex">
+          <h3>Product List</h3>
+          <ProductTable />
+        </Grid>
       </Grid>
-      <Grid >
-        <AddCategory></AddCategory>
-        <ChangeCategory></ChangeCategory>
-        <DeleteACategory></DeleteACategory>
-      </Grid>
-    </Grid>
   );
 };
 export default Admin;

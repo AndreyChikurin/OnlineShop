@@ -6,10 +6,10 @@ export class Product {
     public quantity: number,
     public categoryType: {
       name: string,
-      id?: string,
+      id: string,
       description: string,
     },
-    public id?: string,
+    public id: string,
   ) {}
 }
 

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { Grid, MenuItem, TextField, Typography } from '@mui/material';
-import { NewProduct } from '../../models/Product';
+import { NewProduct, Product } from '../../models/Product';
 import { Service } from '../../Service';
 import ListProducts from '../ListProducts';
 import ChangeCircleOutlinedIcon from '@mui/icons-material/ChangeCircleOutlined';
@@ -11,7 +11,7 @@ import { styles } from './Styles';
 import './AdminPanel.css';
 import ProductComponent from './ProductComponent';
 
-const ChangeProduct = () => {
+const ChangeProduct = (props: Product) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -43,17 +43,17 @@ const ChangeProduct = () => {
   }
 
   const putProduct = new NewProduct(name, price, imgUrl, quantity, categoryTypeId, id);
+  console.log(putProduct)
 
   return (
     <div>
       <Button
-        onClick={handleOpen}
+        onClick={() => {setId(props.id);setName(props.name);setImgUrl(props.imgUrl);setPrice(props.price);setQuantity(props.quantity);setCategoryTypeId(props.categoryType.id);handleOpen()}}
         variant="outlined"
         startIcon={<ChangeCircleOutlinedIcon />}
-        size="large"
         className="adminButton"
       >
-        Change a product
+        Change
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={{ ...styles }}>
@@ -63,22 +63,7 @@ const ChangeProduct = () => {
               Change a product
             </Typography>
             <Grid container direction={'column'} spacing={3}>
-              <Grid item>
-                <TextField
-                  required
-                  select
-                  label="Select a product"
-                  value={id}
-                  onChange={e => setId(e.target.value)}
-                  helperText="Please select a product"
-                  className="width500"
-                >
-                  {ListProducts().map(product => (
-                    <MenuItem key={product.id} value={product.id}>
-                      {product.name}
-                    </MenuItem>
-                  ))}
-                </TextField>
+              <Grid item >
               </Grid>
               <Grid item >
                 <ProductComponent

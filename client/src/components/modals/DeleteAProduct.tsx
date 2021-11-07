@@ -24,8 +24,8 @@ const DeleteAProduct = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="outlined" startIcon={<DeleteIcon />} size="large" className="adminButton">
-        Delete a product
+      <Button onClick={handleOpen} variant="outlined" startIcon={<DeleteIcon />} className="adminButton" color="error">
+        Delete
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={{ ...styles }}>

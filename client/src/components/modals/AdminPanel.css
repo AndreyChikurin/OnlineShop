@@ -3,8 +3,7 @@
 }
 
 .adminButton {
-  size: large;
-  width: 350px;
+  width: 120px;
 }
 
 .saveButton {
@@ -14,11 +13,9 @@
 }
 
 .adminGrid {
-  margin-top: 50px;
-  margin-left: 400px;
-  margin-right: 400px;
-  justify-content: center;
-  display: flex;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  margin-left: 60vh;
 }
 
 .upperPanelButton {
