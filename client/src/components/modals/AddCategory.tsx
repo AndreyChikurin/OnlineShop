@@ -37,10 +37,10 @@ const AddCategory = () => {
     <div>
       <Button
         onClick={handleOpen}
-        variant="outlined"
+        variant="contained"
         startIcon={<AddCircleOutlineIcon />}
-        size="large"
-        className="adminButton"
+        style={{width:'20vh', marginTop:'1vh'}}
+        color="success"
       >
         Add a category
       </Button>

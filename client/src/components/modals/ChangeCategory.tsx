@@ -11,7 +11,7 @@ import { styles } from './Styles';
 import './AdminPanel.css';
 import CategoryComponent from './CategoryComponent';
 
-const ChangeCategory = () => {
+const ChangeCategory = (props: Category) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -38,13 +38,12 @@ const ChangeCategory = () => {
   return (
     <div>
       <Button
-        onClick={handleOpen}
+        onClick={() => {props.id?setId(props.id):setId('');setName(props.name);setDescription(props.description);handleOpen()}}
         variant="outlined"
         startIcon={<ChangeCircleOutlinedIcon />}
-        size="large"
         className="adminButton"
       >
-        Change a category
+        Change
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={{ ...styles }}>
@@ -54,23 +53,6 @@ const ChangeCategory = () => {
               Change a category
             </Typography>
             <Grid container direction={'column'} spacing={3}>
-              <Grid item>
-                <TextField
-                  required
-                  select
-                  label="Select a category"
-                  value={id}
-                  onChange={e => setId(e.target.value)}
-                  helperText="Please select a category"
-                  className="width500"
-                >
-                  {ListCategories().map(category => (
-                    <MenuItem key={category.id} value={category.id}>
-                      {category.name}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Grid>
               <Grid item >
                 <CategoryComponent category={category} />
               </Grid>

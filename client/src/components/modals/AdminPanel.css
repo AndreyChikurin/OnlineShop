@@ -21,3 +21,8 @@
 .upperPanelButton {
   width: 120px
 }
+
+.addButton {
+  width: 20vh;
+  margin-top: 1vh
+}

@@ -13,7 +13,7 @@ import DeleteAProduct from './DeleteAProduct';
 
 export default function ProductTable() {
   return (
-    <TableContainer component={Paper} style={{width:'70vh',height:'50vh'}}>
+    <TableContainer component={Paper} style={{height:'50vh'}}>
       <Table aria-label="caption table">
         <TableHead>
           <TableRow>
@@ -41,7 +41,7 @@ export default function ProductTable() {
               <TableCell align="left">{Product.quantity}</TableCell>
               <TableCell align="left">
                 <ChangeProduct {...Product}/>
-                <DeleteAProduct></DeleteAProduct>
+                <DeleteAProduct {...Product}/>
               </TableCell>
             </TableRow>
           ))}

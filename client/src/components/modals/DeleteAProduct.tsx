@@ -8,8 +8,9 @@ import ListProducts from '../ListProducts';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { styles } from './Styles';
 import './AdminPanel.css';
+import { Product } from 'src/models/Product';
 
-const DeleteAProduct = () => {
+const DeleteAProduct = (props: Product) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -24,7 +25,7 @@ const DeleteAProduct = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="outlined" startIcon={<DeleteIcon />} className="adminButton" color="error">
+      <Button onClick={() => {setId(props.id);handleOpen()}} variant="outlined" startIcon={<DeleteIcon />} className="adminButton" color="error">
         Delete
       </Button>
       <Modal open={open} onClose={handleClose}>
@@ -32,30 +33,12 @@ const DeleteAProduct = () => {
           <form onSubmit={async () => await service.deleteProduct(id)}>
             <br />
             <Typography gutterBottom variant="h5">
-              Delete a product
+              Delete a {props.name}?
             </Typography>
-            <Grid container direction={'column'} spacing={3}>
-              <Grid item>
-                <TextField
-                  required
-                  select
-                  label="Select a product"
-                  value={id}
-                  onChange={e => setId(e.target.value)}
-                  helperText="Please select a product"
-                  className="width500"
-                >
-                  {ListProducts().map(product => (
-                    <MenuItem key={product.id} value={product.id}>
-                      {product.name}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Grid>
-
-              <Grid item>
+            <Grid container direction={'column'}>
+              <Grid item style={{marginTop: 30}}>
                 <Button variant="contained" type="submit">
-                  Save
+                  Delete
                 </Button>
               </Grid>
             </Grid>

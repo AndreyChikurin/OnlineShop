@@ -54,7 +54,6 @@ export default function ProductComponent(props: IWatch) {
         <TextField
           required
           label="Img"
-          defaultValue="Image"
           variant="outlined"
           value={props.watch.imgUrl}
           onChange={e => props.watch.setImgUrl(e.target.value)}

@@ -21,7 +21,6 @@ export default function ProductComponent(props: ICategory) {
         <TextField
           required
           label="Description"
-          defaultValue="Description"
           variant="outlined"
           value={props.category.description}
           onChange={e => props.category.setDescription(e.target.value)}
