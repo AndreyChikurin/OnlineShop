@@ -1,5 +1,4 @@
-import ListCategories from '../ListCategories';
-import { Grid, MenuItem, TextField } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import './AdminPanel.css';
 import { ICategory } from '../Interfaces/ICategory';
 

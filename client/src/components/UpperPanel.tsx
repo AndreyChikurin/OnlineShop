@@ -22,7 +22,7 @@ import List from '@mui/material/List';
 import { Grid } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { ADMIN_ROUTE, BASKET_ROUTE, FILTER_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from 'src/utils/consts';
-import { Button, ButtonGroup } from '@mui/material';
+import { Button } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';

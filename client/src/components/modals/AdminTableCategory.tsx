@@ -62,6 +62,11 @@ export default function CategoryTable() {
             </TableRow>
           ))}
         </TableBody>
+        {emptyRows > 0 && (
+            <TableRow style={{ height: 105 * emptyRows }}>
+              <TableCell colSpan={6} />
+            </TableRow>
+          )}
         <TableFooter>
           <TableRow>
             <TablePagination
