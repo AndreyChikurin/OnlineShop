@@ -2,15 +2,14 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import ListCategories from '../ListCategories';
-import { Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { Service } from '../../Service';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { styles } from './Styles';
 import './AdminPanel.css';
-import { Category } from 'src/models/Category';
+import { Product } from 'src/models/Product';
 
-const DeleteACategory = (props: Category) => {
+const DeleteProduct = (props: Product) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -25,18 +24,18 @@ const DeleteACategory = (props: Category) => {
 
   return (
     <div>
-      <Button onClick={() => {props.id?setId(props.id):setId('');handleOpen()}} variant="outlined" startIcon={<DeleteIcon />} className="adminButton" color="error">
+      <Button onClick={() => {setId(props.id);handleOpen()}} variant="outlined" startIcon={<DeleteIcon />} className="adminButton" color="error">
         Delete
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={{ ...styles }}>
-          <form onSubmit={async () => await service.deleteCategory(id)}>
+          <form onSubmit={async () => await service.deleteProduct(id)}>
             <br />
             <Typography gutterBottom variant="h5">
-              Delete a {props.name} category?
+              Delete a {props.name}?
             </Typography>
-            <Grid container direction={'column'} spacing={3}>
-              <Grid item style={{marginTop: 30}}>
+            <Grid container direction={'column'} className="gridItem">
+              <Grid item>
                 <Button variant="contained" type="submit">
                   Delete
                 </Button>
@@ -52,4 +51,4 @@ const DeleteACategory = (props: Category) => {
   );
 };
 
-export default DeleteACategory;
+export default DeleteProduct;

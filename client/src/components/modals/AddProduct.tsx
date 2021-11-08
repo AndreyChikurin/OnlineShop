@@ -48,7 +48,7 @@ const AddProduct = () => {
         onClick={handleOpen}
         variant="contained"
         startIcon={<AddCircleOutlineIcon />}
-        style={{width:'20vh', marginTop:'1vh'}}
+        className='addButton'
         color="success"
       >
         Add a product

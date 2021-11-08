@@ -13,3 +13,12 @@
     justify-content: center;
     display: flex;
 }
+
+.spaceBetweenMt3 {
+    justify-content:space-between;
+    margin-top: 3vh;
+}
+
+.spaceBetween {
+    justify-content:space-between;
+}

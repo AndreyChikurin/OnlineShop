@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ListCategories from '../ListCategories';
 import ChangeCategory from './ChangeCategory';
-import DeleteACategory from './DeleteACategory';
+import DeleteCategory from './DeleteCategory';
 
 export default function CategoryTable() {
   return (
@@ -30,7 +30,7 @@ export default function CategoryTable() {
               <TableCell align="left">{Category.description}</TableCell>
               <TableCell align="left">
                 <ChangeCategory {...Category}/>
-                <DeleteACategory {...Category}/>
+                <DeleteCategory {...Category}/>
               </TableCell>
             </TableRow>
           ))}

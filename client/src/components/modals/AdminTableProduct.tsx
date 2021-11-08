@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import ListProducts from '../ListProducts';
 import { Card, CardActionArea, CardMedia, Grid } from '@mui/material';
 import ChangeProduct from './ChangeProduct';
-import DeleteAProduct from './DeleteAProduct';
+import DeleteProduct from './DeleteProduct';
 
 export default function ProductTable() {
   return (
@@ -41,7 +41,7 @@ export default function ProductTable() {
               <TableCell align="left">{Product.quantity}</TableCell>
               <TableCell align="left">
                 <ChangeProduct {...Product}/>
-                <DeleteAProduct {...Product}/>
+                <DeleteProduct {...Product}/>
               </TableCell>
             </TableRow>
           ))}
