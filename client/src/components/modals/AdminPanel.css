@@ -12,12 +12,6 @@
   display: flex;
 }
 
-.adminGrid {
-  margin-top: 20px;
-  margin-bottom: 100px;
-  margin-left: 60vh;
-}
-
 .upperPanelButton {
   width: 120px
 }
@@ -29,4 +23,8 @@
 
 .gridItem {
   margin-top: 3vh;
+}
+
+.categoryTableHeight {
+  height: 41vh;
 }

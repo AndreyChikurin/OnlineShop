@@ -8,8 +8,8 @@ import CategoryTable from 'src/components/modals/AdminTableCategory';
 
 const Admin = () => {
   return (
-      <Grid className='adminGrid' style={{width:'70vh'}}>
-        <Grid container direction="column" className="centerFlex">
+      <Grid className='adminGrid'>
+        <Grid container direction="column">
           <Grid container className="spaceBetween">
             <h3>Product List</h3>
             <AddProduct />
