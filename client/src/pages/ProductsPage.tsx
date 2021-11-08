@@ -8,11 +8,10 @@ import { Product } from 'src/models/Product';
 const ProductsPage = () => {
   const link: any = useParams();
 
-  const service: Service = new Service();
-
   const [product, setProduct] = useState<Product>();
 
   useEffect(() => {
+    const service: Service = new Service();
     async function get() {
       const prod = await service.getProduct(link.id);
       setProduct(prod);

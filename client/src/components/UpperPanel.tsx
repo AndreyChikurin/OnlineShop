@@ -211,11 +211,11 @@ const UpperPanel = observer(() => {
     </Menu>
   );
 
-  const service: Service = new Service();
 
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
+    const service: Service = new Service();
     async function get() {
       const cat = await service.getCategories();
       setCategories(cat);

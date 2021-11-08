@@ -9,11 +9,10 @@ import { PRODUCT_ROUTE } from 'src/utils/consts';
 export default function CardsGrid() {
   const history = useHistory();
 
-  const service: Service = new Service();
-
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    const service: Service = new Service();
     async function get() {
       const prod = await service.getProducts();
       setProducts(prod);

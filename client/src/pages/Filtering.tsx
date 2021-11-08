@@ -15,13 +15,13 @@ const Filtering = () => {
     
     const history = useHistory()
     
-  const service: Service = new Service();
 
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {async function get() {
-        const prod = await service.getProducts();
-        setProducts(prod);
+    const service: Service = new Service();
+    const prod = await service.getProducts();
+    setProducts(prod);
     }; get()
     }, []);
 
