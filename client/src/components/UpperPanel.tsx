@@ -23,14 +23,13 @@ import { Grid } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { ADMIN_ROUTE, BASKET_ROUTE, FILTER_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from 'src/utils/consts';
 import { Button } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import { Service } from 'src/Service';
-import { Category } from 'src/models/Category';
 import '../components/modals/AdminPanel.css';
+import ListCategories from './ListCategories';
 
 const drawerWidth = 240;
 
@@ -211,18 +210,6 @@ const UpperPanel = observer(() => {
     </Menu>
   );
 
-
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    const service: Service = new Service();
-    async function get() {
-      const cat = await service.getCategories();
-      setCategories(cat);
-    }
-    get();
-  }, []);
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" open={open} style={{ background: '#DAA520', color: 'black' }}>
@@ -296,7 +283,7 @@ const UpperPanel = observer(() => {
           <Grid container spacing={-1} justifyContent="center">
             Categories
           </Grid>
-          {categories.map(
+          {ListCategories().map(
             value => (
               (
                 <ListItem button key={value.id} onClick={() => history.push(FILTER_ROUTE + '/' + value.id)}>
