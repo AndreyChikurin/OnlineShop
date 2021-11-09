@@ -7,7 +7,6 @@ export class Service {
     try {
       const response = await fetch(SERVER + API_PRODUCTS);
       const productData = await response.json();
-      console.log('asd')
       return productData;
     } catch (error) {
       throw Error('Failed to fetch products');
@@ -30,7 +29,6 @@ export class Service {
       console.log(response);
       const productData = await response.json();
       return productData;
-      console.log(productData);
     } catch (error) {
       throw Error('Failed to fetch products');
     }

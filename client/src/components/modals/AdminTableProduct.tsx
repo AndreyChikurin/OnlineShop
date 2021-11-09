@@ -29,7 +29,6 @@ export default function ProductTable() {
   async function get() {
     const cat = await service.getProductsPagination(rowsPerPage.toString(), page.toString());
     setRows(cat);
-    console.log(cat)
     return cat;
   }
     React.useEffect(() => {
