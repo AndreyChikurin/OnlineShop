@@ -9,6 +9,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { styles } from './Styles';
 import './AdminPanel.css';
 import ProductComponent from './ProductComponent';
+import { IAddButton } from '../Interfaces/IAddButtons';
+import AddButton from './Buttons/AddButton';
 
 const AddProduct = () => {
   const [open, setOpen] = useState(false);
@@ -41,18 +43,11 @@ const AddProduct = () => {
   }
 
   const newProduct = new NewProduct(name, price, imgUrl, quantity, categoryTypeId);
+  const buttonText:IAddButton = {text:"Add a product"};
 
   return (
     <div>
-      <Button
-        onClick={handleOpen}
-        variant="contained"
-        startIcon={<AddCircleOutlineIcon />}
-        className='addButton'
-        color="success"
-      >
-        Add a product
-      </Button>
+      <AddButton store={buttonText} handleClick={handleOpen}/>
       <Modal open={open} onClose={handleClose}>
         <Box sx={{ ...styles }}>
           <form onSubmit={async () => await service.saveProduct(newProduct)}>

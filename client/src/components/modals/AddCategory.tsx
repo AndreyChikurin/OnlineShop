@@ -9,6 +9,8 @@ import { styles } from './Styles';
 import './AdminPanel.css';
 import CategoryComponent from './CategoryComponent';
 import { Category } from 'src/models/Category';
+import AddButton from './Buttons/AddButton';
+import { IAddButton } from '../Interfaces/IAddButtons';
 
 const AddCategory = () => {
   const [open, setOpen] = useState(false);
@@ -30,20 +32,13 @@ const AddCategory = () => {
     description: description,
     setDescription: setDescription,
   };
-
+  
   const newCategory = new Category(name, description);
+  const buttonText:IAddButton = {text:"Add a category"};
 
   return (
     <div>
-      <Button
-        onClick={handleOpen}
-        variant="contained"
-        startIcon={<AddCircleOutlineIcon />}
-        className='addButton'
-        color="success"
-      >
-        Add a category
-      </Button>
+      <AddButton store={buttonText} handleClick={handleOpen}/>
       <Modal open={open} onClose={handleClose}>
         <Box sx={{ ...styles }}>
           <form onSubmit={async () => await service.saveCategory(newCategory)}>

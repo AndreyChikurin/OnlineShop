@@ -79,7 +79,7 @@
             if (categoryProducts.Count() == 0)
             {
                 categoryService.DeleteCategory(id);
-                return Ok();
+                return NoContent();
             }
 
             return Conflict();

@@ -94,7 +94,7 @@
             }
 
             productService.DeleteProduct(id);
-            return Ok();
+            return NoContent();
         }
     }
 }
