@@ -13,42 +13,47 @@ import DeleteProduct from './DeleteProduct';
 import { KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import ListProductsPagionation from '../ListProductsPagination';
 import { Product } from 'src/models/Product';
 import { Service } from 'src/Service';
 
 export default function ProductTable() {
-
   const service: Service = new Service();
+
+  const productCount = ListProducts().length;
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
+  
   const [rows, setRows] = React.useState<Product[]>([]);
 
+  async function get() {
+    const cat = await service.getProductsPagination(rowsPerPage.toString(), page.toString());
+    setRows(cat);
+    console.log(cat)
+    return cat;
+  }
+    React.useEffect(() => {
+      get();
+    }, [page]);
+
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - ListProducts().length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - productCount) : 0;
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
   ) => {
     setPage(newPage);
-    async function get() {
-      const cat = await service.getProductsPagination(rowsPerPage.toString(), newPage.toString());
-      setRows(cat);
-      console.log(cat)
-  }get();}
-
+    get();
+  }
+  
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value));
     setPage(0);
-    async function get() {
-      const cat = await service.getProductsPagination(rowsPerPage.toString(), '0');
-      setRows(cat);
-      console.log(cat)
-  }get();}
+    get();
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -64,10 +69,7 @@ export default function ProductTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-            ).map(Product => (
+          { rows.map(Product => (
             <TableRow key={Product.id}>
               <TableCell component="th" scope="row">
                 <CardMedia
@@ -95,9 +97,9 @@ export default function ProductTable() {
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[4, 8, { label: 'All', value: -1 }]}
+              rowsPerPageOptions={[4, 8, 10, { label: 'All', value: productCount }]}
               colSpan={6}
-              count={rows.length}
+              count={productCount}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{
