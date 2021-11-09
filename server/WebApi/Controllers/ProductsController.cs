@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net;
     using Application.DTO;
     using Application.DTO.Request;
     using Application.Interfaces;
     using Application.ViewModels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using Swashbuckle.AspNetCore.Annotations;
 
     [ApiController]
     [Route("api/[controller]")]
@@ -30,6 +32,8 @@
             return productService.GetProducts();
         }
 
+        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(ProductDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpGet("{id}")]
         public ActionResult<ProductDto> GetProduct(Guid id)
         {
@@ -43,6 +47,8 @@
             return product;
         }
 
+        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(ProductDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpPost]
         public ActionResult<ProductDto> AddProduct(AddProductDto productDto)
         {
@@ -59,6 +65,8 @@
             return Ok(product);
         }
 
+        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(ProductDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpPut]
         public ActionResult EditProduct(EditProductDto productDto)
         {
@@ -83,6 +91,8 @@
             return Ok();
         }
 
+        [SwaggerResponse((int)HttpStatusCode.NoContent)]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(Guid id)
         {

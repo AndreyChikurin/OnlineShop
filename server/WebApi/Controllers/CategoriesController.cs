@@ -3,12 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using Application.DTO;
     using Application.DTO.Request;
     using Application.Interfaces;
     using Application.ViewModels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using Swashbuckle.AspNetCore.Annotations;
 
     [ApiController]
     [Route("api/[controller]")]
@@ -29,6 +31,8 @@
             return categoryService.GetCategories();
         }
 
+        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(CategoryDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpGet("{id}")]
         public ActionResult<CategoryDto> GetCategory(Guid id)
         {
@@ -42,6 +46,7 @@
             return category;
         }
 
+        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(CategoryDto))]
         [HttpPost]
         public ActionResult<CategoryDto> AddCategory(AddCategoryDto categoryDto)
         {
@@ -50,6 +55,8 @@
             return Ok(category);
         }
 
+        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(CategoryDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpPut]
         public ActionResult<CategoryDto> EditCategory(EditCategoryDto categoryDto)
         {
@@ -64,6 +71,9 @@
             return Ok(categoryDto);
         }
 
+        [SwaggerResponse((int)HttpStatusCode.NoContent)]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
+        [SwaggerResponse((int)HttpStatusCode.Conflict)]
         [HttpDelete("{id}")]
         public ActionResult DeleteCategory(Guid id)
         {
