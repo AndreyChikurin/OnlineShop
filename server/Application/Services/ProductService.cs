@@ -22,6 +22,18 @@
             return _productRepository.GetProducts().Select(x => x.AsDto()).ToList();
         }
 
+        public IEnumerable<ProductDto> GetProductsPagination(int quantityPerPage, int pageNumber)
+        {
+            var products = _productRepository.GetProductsPagination(quantityPerPage, pageNumber);
+
+            if (products == null)
+            {
+                return null;
+            }
+
+            return products.Select(x => x.AsDto()).ToList();
+        }
+
         public ProductDto GetProduct(Guid id)
         {
             var product = _productRepository.GetProduct(id);

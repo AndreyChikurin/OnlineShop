@@ -8,6 +8,8 @@
     {
         IEnumerable<Product> GetProducts();
 
+        IEnumerable<Product> GetProductsPagination(int quantityPerPage, int pageNumber);
+
         Product GetProduct(Guid id);
 
         void AddProduct(Product product);

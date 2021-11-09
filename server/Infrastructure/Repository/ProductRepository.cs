@@ -22,6 +22,24 @@
             return context.Products.Include(c => c.CategoryType).ToList();
         }
 
+        public IEnumerable<Product> GetProductsPagination(int quantityPerPage, int pageNumber)
+        {
+            quantityPerPage = Math.Abs(quantityPerPage);
+            pageNumber = Math.Abs(pageNumber);
+
+            var listProductsCount = GetProducts().Count();
+
+            var skip = pageNumber * quantityPerPage;
+            var take = listProductsCount - skip < quantityPerPage ? listProductsCount - skip : quantityPerPage;
+
+            if (skip >= listProductsCount)
+            {
+                return null;
+            }
+
+            return context.Products.Include(c => c.CategoryType).Skip(skip).Take(take).ToList();
+        }
+
         public Product GetProduct(Guid id)
         {
             var product = context.Products.Include(c => c.CategoryType).SingleOrDefault(x => x.Id == id);

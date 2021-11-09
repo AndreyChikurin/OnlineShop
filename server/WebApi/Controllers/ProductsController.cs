@@ -32,6 +32,12 @@
             return productService.GetProducts();
         }
 
+        [HttpGet("Pagination")]
+        public IEnumerable<ProductDto> GetProductsPagination(int quantityPerPage, int pageNumber)
+        {
+            return productService.GetProductsPagination(quantityPerPage, pageNumber);
+        }
+
         [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(ProductDto))]
         [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpGet("{id}")]
