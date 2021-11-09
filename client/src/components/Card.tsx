@@ -5,22 +5,23 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@material-ui/core';
+import { Product } from 'src/models/Product';
 
-export default function MediaCard(props?: any) {
+const MediaCard = (product: Product) => {
   return (
     <Card sx={{ minWidth: 250, minHeight: 430, maxWidth: 250, maxHeight: 430 }}>
       <CardActionArea>
         <CardMedia
           sx={{ minWidth: 250, minHeight: 250, maxWidth: 250, maxHeight: 250 }}
           component="img"
-          image={props.product.imgUrl}
+          image={product.imgUrl}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" sx={{ minHeight: 70, maxHeight: 70 }}>
-            {props.product.name}
+            {product.name}
           </Typography>
           <Typography variant="body1" color="black">
-            {props.product.price}$
+            {product.price}$
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -30,3 +31,5 @@ export default function MediaCard(props?: any) {
     </Card>
   );
 }
+
+export default MediaCard;

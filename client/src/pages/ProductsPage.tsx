@@ -4,9 +4,11 @@ import { Button, Card, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Service } from 'src/Service';
 import { Product } from 'src/models/Product';
+import { Link } from 'src/components/Types/Link';
 
 const ProductsPage = () => {
-  const link: any = useParams();
+
+  const link: Link = useParams();
 
   const [product, setProduct] = useState<Product>();
 

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { PRODUCT_ROUTE } from 'src/utils/consts';
 import ListProducts from './ListProducts';
 
-export default function CardsGrid() {
+const CardsGrid = () => {
 
   const history = useHistory();
 
@@ -12,9 +12,11 @@ export default function CardsGrid() {
     <Grid container spacing={2} justifyContent="center">
       {ListProducts().map(value => (
         <Grid item key={value.id} onClick={() => history.push(PRODUCT_ROUTE + '/' + value.id)}>
-          <MediaCard product={value}> </MediaCard>
+          <MediaCard {...value}> </MediaCard>
         </Grid>
       ))}
     </Grid>
   );
 }
+
+export default CardsGrid;
