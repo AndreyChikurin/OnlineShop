@@ -23,6 +23,16 @@ export class Service {
     }
   }
 
+  async getProductsPagination(quantityPerPage: string, pageNumber: string) {
+    try {
+      const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?quantityPerPage=' + quantityPerPage + '&pageNumber=' + pageNumber);
+      const productData = await response.json();
+      return productData;
+    } catch (error) {
+      throw Error('Failed to fetch 1 product');
+    }
+  }
+
   async getCategories() {
     try {
       const ans = await fetch(SERVER + API_CATEGORIES);

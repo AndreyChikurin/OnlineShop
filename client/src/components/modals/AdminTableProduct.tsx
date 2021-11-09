@@ -13,30 +13,42 @@ import DeleteProduct from './DeleteProduct';
 import { KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
+import ListProductsPagionation from '../ListProductsPagination';
+import { Product } from 'src/models/Product';
+import { Service } from 'src/Service';
 
 export default function ProductTable() {
 
-  const rows = ListProducts();
+  const service: Service = new Service();
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
+  const [rows, setRows] = React.useState<Product[]>([]);
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - ListProducts().length) : 0;
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
   ) => {
     setPage(newPage);
-  };
+    async function get() {
+      const cat = await service.getProductsPagination(rowsPerPage.toString(), newPage.toString());
+      setRows(cat);
+      console.log(cat)
+  }get();}
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
+    async function get() {
+      const cat = await service.getProductsPagination(rowsPerPage.toString(), '0');
+      setRows(cat);
+      console.log(cat)
+  }get();}
 
   return (
     <TableContainer component={Paper}>
