@@ -32,7 +32,7 @@
                 return null;
             }
 
-            return products.Select(x => x.AsDto()).ToList();
+            return products.Select(x => x.AsDto());
         }
 
         public ProductDto GetProduct(Guid id)

@@ -13,6 +13,6 @@
 
         public string Filter { get; set; } = null;
 
-        public Guid CategoryId { get; set; } = Guid.Empty;
+        public Guid CategoryId { get; set; }
     }
 }

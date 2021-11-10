@@ -23,45 +23,45 @@
             return context.Products.Include(c => c.CategoryType).ToList();
         }
 
-        public IEnumerable<Product> GetProducts(ProductFilter productFiler)
+        public IEnumerable<Product> GetProducts(ProductFilter productFilter)
         {
-            var quantityPerPage = productFiler.QuantityPerPage;
-            var pageNumber = productFiler.PageNumber;
-            var filer = productFiler.Filter;
-            var categoryId = productFiler.CategoryId;
+            int quantityPerPage = productFilter.QuantityPerPage;
+            int pageNumber = productFilter.PageNumber;
+            var filter = productFilter.Filter;
+            var categoryId = productFilter.CategoryId;
 
             quantityPerPage = Math.Abs(quantityPerPage);
             pageNumber = Math.Abs(pageNumber);
 
-            var listProductsCount = GetProducts().Count();
+            int listProductsCount = GetProducts().Count();
 
-            var skip = pageNumber * quantityPerPage;
-            var take = listProductsCount - skip < quantityPerPage ? listProductsCount - skip : quantityPerPage;
+            int skip = pageNumber * quantityPerPage;
+            int take = listProductsCount - skip < quantityPerPage ? listProductsCount - skip : quantityPerPage;
 
             if (skip >= listProductsCount)
             {
                 return null;
             }
 
-            var result = context.Products.Include(c => c.CategoryType).Skip(skip).Take(take);
-
-            if (filer.ToLower() == "increasing price")
-            {
-                result = result.OrderBy(product => product.Price);
-            }
-
-            if (filer.ToLower() == "decreasing price")
-            {
-                result = result.OrderByDescending(product => product.Price);
-            }
+            var result = context.Products.Include(c => c.CategoryType).ToList();
 
             if (context.Categories.Any(category => category.Id == categoryId))
             {
                 var category = context.Categories.Where(category => category.Id == categoryId).First();
-                result = context.Products.Where(product => product.CategoryType.Id == categoryId);
+                result = context.Products.Where(product => product.CategoryType.Id == categoryId).ToList();
             }
 
-            return result.ToList();
+            if (filter != null && filter.ToLower() == "increasingprice")
+            {
+                result = result.OrderBy(product => product.Price).ToList();
+            }
+
+            if (filter != null && filter.ToLower() == "decreasingprice")
+            {
+                result = result.OrderByDescending(product => product.Price).ToList();
+            }
+
+            return result.Skip(skip).Take(take).ToList();
         }
 
         public Product GetProduct(Guid id)

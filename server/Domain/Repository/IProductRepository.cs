@@ -9,7 +9,7 @@
     {
         IEnumerable<Product> GetProducts();
 
-        IEnumerable<Product> GetProducts(ProductFilter productFiler);
+        IEnumerable<Product> GetProducts(ProductFilter productFilter);
 
         Product GetProduct(Guid id);
 
