@@ -31,8 +31,8 @@
             return categoryService.GetCategories();
         }
 
-        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(CategoryDto))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound)]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Product has been received", typeof(CategoryDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, "Category not found")]
         [HttpGet("{id}")]
         public ActionResult<CategoryDto> GetCategory(Guid id)
         {
@@ -40,23 +40,23 @@
 
             if (category is null)
             {
-                return NotFound();
+                return NotFound("Category not found");
             }
 
             return category;
         }
 
-        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(CategoryDto))]
+        [SwaggerResponse((int)HttpStatusCode.Created, "Category has been created", typeof(CategoryDto))]
         [HttpPost]
         public ActionResult<CategoryDto> AddCategory(AddCategoryDto categoryDto)
         {
             var category = categoryDto.AsDto();
             categoryService.AddCategory(category);
-            return Ok(category);
+            return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, category);
         }
 
-        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(CategoryDto))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound)]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Category has been changed", typeof(CategoryDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, "Category not found")]
         [HttpPut]
         public ActionResult<CategoryDto> EditCategory(EditCategoryDto categoryDto)
         {
@@ -64,15 +64,15 @@
 
             if (existingCategory is null)
             {
-                return NotFound();
+                return NotFound("Category not found");
             }
 
             categoryService.EditCategory(categoryDto);
             return Ok(categoryDto);
         }
 
-        [SwaggerResponse((int)HttpStatusCode.NoContent)]
-        [SwaggerResponse((int)HttpStatusCode.NotFound)]
+        [SwaggerResponse((int)HttpStatusCode.NoContent, "Category has been deleted")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, "Category not found")]
         [SwaggerResponse((int)HttpStatusCode.Conflict)]
         [HttpDelete("{id}")]
         public ActionResult DeleteCategory(Guid id)
@@ -81,7 +81,7 @@
 
             if (existingCategory is null)
             {
-                return NotFound();
+                return NotFound("Category not found");
             }
 
             var categoryProducts = categoryService.GetProducts(id);
@@ -89,7 +89,7 @@
             if (categoryProducts.Count() == 0)
             {
                 categoryService.DeleteCategory(id);
-                return NoContent();
+                return Ok();
             }
 
             return Conflict();

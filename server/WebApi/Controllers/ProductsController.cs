@@ -38,8 +38,8 @@
             return productService.GetProductsPagination(quantityPerPage, pageNumber);
         }
 
-        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(ProductDto))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound)]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Product has been received", typeof(ProductDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, "Product not found")]
         [HttpGet("{id}")]
         public ActionResult<ProductDto> GetProduct(Guid id)
         {
@@ -47,14 +47,14 @@
 
             if (product is null)
             {
-                return NotFound();
+                return NotFound("Product not found");
             }
 
             return product;
         }
 
-        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(ProductDto))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound)]
+        [SwaggerResponse((int)HttpStatusCode.Created, "Product has been created", typeof(ProductDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, "Category not found")]
         [HttpPost]
         public ActionResult<ProductDto> AddProduct(AddProductDto productDto)
         {
@@ -68,12 +68,12 @@
             ProductDto product = productDto.AsDto();
             product.CategoryType = exsistingGategory;
             productService.AddProduct(product);
-            return Ok(product);
+            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
-        [SwaggerResponse((int)HttpStatusCode.OK, "", typeof(ProductDto))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpPut]
+        [SwaggerResponse((int)HttpStatusCode.OK, "Product has been changed", typeof(ProductDto))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, "Product not found or Category not found")]
         public ActionResult EditProduct(EditProductDto productDto)
         {
             var existingProduct = productService.GetProduct(productDto.Id);
@@ -94,11 +94,11 @@
             product.CategoryType = exsistingGategory;
 
             productService.EditProduct(product);
-            return Ok();
+            return Ok(product);
         }
 
-        [SwaggerResponse((int)HttpStatusCode.NoContent)]
-        [SwaggerResponse((int)HttpStatusCode.NotFound)]
+        [SwaggerResponse((int)HttpStatusCode.NoContent, "Product has been deleted")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, "Product not found")]
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(Guid id)
         {
@@ -106,11 +106,11 @@
 
             if (existingProduct is null)
             {
-                return NotFound();
+                return NotFound("Product not found");
             }
 
             productService.DeleteProduct(id);
-            return NoContent();
+            return Ok();
         }
     }
 }
