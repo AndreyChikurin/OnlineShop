@@ -7,6 +7,7 @@
     using Application.DTO.Request;
     using Application.Interfaces;
     using Application.ViewModels;
+    using Filtering;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Swashbuckle.AspNetCore.Annotations;
@@ -32,10 +33,11 @@
             return productService.GetProducts();
         }
 
-        [HttpGet("Pagination")]
-        public IEnumerable<ProductDto> GetProductsPagination(int quantityPerPage, int pageNumber)
+        [HttpGet]
+        [Route("Pagination")]
+        public IEnumerable<ProductDto> GetProducts(ProductFilter productFilter)
         {
-            return productService.GetProductsPagination(quantityPerPage, pageNumber);
+            return productService.GetProducts(productFilter);
         }
 
         [SwaggerResponse((int)HttpStatusCode.OK, "Product has been received", typeof(ProductDto))]

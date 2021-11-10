@@ -3,12 +3,13 @@
     using System;
     using System.Collections.Generic;
     using Application.ViewModels;
+    using Filtering;
 
     public interface IProductService
     {
         IEnumerable<ProductDto> GetProducts();
 
-        IEnumerable<ProductDto> GetProductsPagination(int quantityPerPage, int pageNumber);
+        IEnumerable<ProductDto> GetProducts(ProductFilter productFilter);
 
         ProductDto GetProduct(Guid id);
 

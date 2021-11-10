@@ -3,12 +3,13 @@
     using System;
     using System.Collections.Generic;
     using Domain.Models;
+    using Filtering;
 
     public interface IProductRepository
     {
         IEnumerable<Product> GetProducts();
 
-        IEnumerable<Product> GetProductsPagination(int quantityPerPage, int pageNumber);
+        IEnumerable<Product> GetProducts(ProductFilter productFiler);
 
         Product GetProduct(Guid id);
 

@@ -7,6 +7,7 @@
     using Application.Interfaces;
     using Application.ViewModels;
     using Domain.Repository;
+    using Filtering;
 
     public class ProductService : IProductService
     {
@@ -22,9 +23,9 @@
             return _productRepository.GetProducts().Select(x => x.AsDto()).ToList();
         }
 
-        public IEnumerable<ProductDto> GetProductsPagination(int quantityPerPage, int pageNumber)
+        public IEnumerable<ProductDto> GetProducts(ProductFilter productFilter)
         {
-            var products = _productRepository.GetProductsPagination(quantityPerPage, pageNumber);
+            var products = _productRepository.GetProducts(productFilter);
 
             if (products == null)
             {

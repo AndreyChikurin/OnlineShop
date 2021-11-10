@@ -5,6 +5,7 @@
     using System.Linq;
     using Domain.Models;
     using Domain.Repository;
+    using Filtering;
     using Infrastructure.EF;
     using Microsoft.EntityFrameworkCore;
 
@@ -22,8 +23,13 @@
             return context.Products.Include(c => c.CategoryType).ToList();
         }
 
-        public IEnumerable<Product> GetProductsPagination(int quantityPerPage, int pageNumber)
+        public IEnumerable<Product> GetProducts(ProductFilter productFiler)
         {
+            var quantityPerPage = productFiler.QuantityPerPage;
+            var pageNumber = productFiler.PageNumber;
+            var filer = productFiler.Filter;
+            var categoryId = productFiler.CategoryId;
+
             quantityPerPage = Math.Abs(quantityPerPage);
             pageNumber = Math.Abs(pageNumber);
 
@@ -37,7 +43,25 @@
                 return null;
             }
 
-            return context.Products.Include(c => c.CategoryType).Skip(skip).Take(take).ToList();
+            var result = context.Products.Include(c => c.CategoryType).Skip(skip).Take(take);
+
+            if (filer.ToLower() == "increasing price")
+            {
+                result = result.OrderBy(product => product.Price);
+            }
+
+            if (filer.ToLower() == "decreasing price")
+            {
+                result = result.OrderByDescending(product => product.Price);
+            }
+
+            if (context.Categories.Any(category => category.Id == categoryId))
+            {
+                var category = context.Categories.Where(category => category.Id == categoryId).First();
+                result = context.Products.Where(product => product.CategoryType.Id == categoryId);
+            }
+
+            return result.ToList();
         }
 
         public Product GetProduct(Guid id)
