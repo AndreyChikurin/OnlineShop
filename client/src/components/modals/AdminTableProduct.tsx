@@ -33,7 +33,7 @@ export default function ProductTable() {
   }
     React.useEffect(() => {
       get();
-    }, [page]);
+    }, [page, rowsPerPage]);
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - productCount) : 0;
@@ -43,7 +43,6 @@ export default function ProductTable() {
     newPage: number,
   ) => {
     setPage(newPage);
-    get();
   }
   
   const handleChangeRowsPerPage = (
@@ -51,7 +50,6 @@ export default function ProductTable() {
   ) => {
     setRowsPerPage(parseInt(event.target.value));
     setPage(0);
-    get();
   }
 
   return (

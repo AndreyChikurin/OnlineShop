@@ -26,7 +26,6 @@ export class Service {
   async getProductsPagination(quantityPerPage: string, pageNumber: string) {
     try {
       const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?quantityPerPage=' + quantityPerPage + '&pageNumber=' + pageNumber);
-      console.log(response);
       const productData = await response.json();
       return productData;
     } catch (error) {

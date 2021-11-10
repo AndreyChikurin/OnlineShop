@@ -59,7 +59,7 @@
                     Id = Guid.NewGuid(),
                     Name = "Patek Fhillippe Geneve",
                     Price = 95000,
-                    ImgUrl = "https://www.replicaoutlet.it/wp-content/uploads/2018/06/4csg3fvnbm4.jpg",
+                    ImgUrl = "https://i2.wp.com/tovary-obzor.ru/wp-content/uploads/2017/10/1-85.jpg",
                     Quantity = 10,
                     CategoryType = categories[1],
                 },
