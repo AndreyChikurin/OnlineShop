@@ -6,8 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ListProducts from '../ListProducts';
-import { Box, CardMedia, IconButton, TableFooter, TablePagination, useTheme } from '@mui/material';
+import { Box, CardMedia, IconButton, TableFooter, TablePagination, Toolbar, Tooltip, Typography, useTheme } from '@mui/material';
 import ChangeProduct from './ChangeProduct';
 import DeleteProduct from './DeleteProduct';
 import { KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
@@ -16,6 +15,8 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { Filter, Product } from 'src/models/Product';
 import { Service } from 'src/Service';
 import { IFilter } from '../Interfaces/IFilter';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import AddProduct from './AddProduct';
 
 export default function ProductTable() {
   const service: Service = new Service();
@@ -57,6 +58,7 @@ export default function ProductTable() {
   }
 
   return (
+
     <TableContainer component={Paper}>
       <Table aria-label="caption table">
         <TableHead>
@@ -97,6 +99,11 @@ export default function ProductTable() {
         </TableBody>
         <TableFooter>
           <TableRow>
+            <TableCell align="left" >
+              <IconButton>
+                <FilterListIcon />
+              </IconButton>
+            </TableCell>
             <TablePagination
               rowsPerPageOptions={[4, 8, 10, { label: 'All', value: productCount }]}
               colSpan={6}
