@@ -31,7 +31,6 @@ export default function ProductTable() {
 
   async function get() {
     const cat : IFilter = await service.getProductsPaginations(filter);
-    console.log(cat)
     setRows(cat.productsList);
     setProductCount(cat.totalItemsCount)
     return cat.productsList;

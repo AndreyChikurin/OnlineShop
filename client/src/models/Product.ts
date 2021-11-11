@@ -26,8 +26,10 @@ export class NewProduct {
 
 export class Filter {
   constructor(
-    public quantityPerPage: number,
-    public pageNumber: number,
+    public quantityPerPage?: number,
+    public pageNumber?: number,
+    public priceIsMore?: number,
+    public priceIsLess?: number,
     public filter?: string,
     public categoryId?: string,
   ) {}

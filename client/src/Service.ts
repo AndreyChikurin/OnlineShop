@@ -35,8 +35,31 @@ export class Service {
 
   async getProductsPaginations(filter: Filter) {
     try {
-      const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?quantityPerPage=' + filter.quantityPerPage + '&pageNumber=' + filter.pageNumber);
+      let reqString : String = '';
+
+      if(filter.quantityPerPage !== undefined){
+        reqString = reqString + '&quantityPerPage=' + filter.quantityPerPage
+      }
+      
+      if(filter.pageNumber !== undefined){
+        reqString = reqString + '&pageNumber=' + filter.pageNumber
+      }
+
+      if(filter.priceIsLess !== undefined){
+        reqString = reqString + '&PriceIsLess=' + filter.priceIsLess
+      }
+      
+      if(filter.priceIsMore !== undefined){
+        reqString = reqString + '&PriceIsMore=' + filter.priceIsMore
+      }
+      
+      if(filter.categoryId !== undefined){
+        reqString = reqString + '&CategoryId=' + filter.categoryId
+      }
+      const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?' + reqString);
       const productData = await response.json();
+      console.log(filter);
+      console.log(filter.toString());
       return productData;
     } catch (error) {
       throw Error('Failed to fetch products');
