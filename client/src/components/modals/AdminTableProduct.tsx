@@ -13,23 +13,28 @@ import DeleteProduct from './DeleteProduct';
 import { KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import { Product } from 'src/models/Product';
+import { Filter, Product } from 'src/models/Product';
 import { Service } from 'src/Service';
+import { IFilter } from '../Interfaces/IFilter';
 
 export default function ProductTable() {
   const service: Service = new Service();
 
-  const productCount = ListProducts().length;
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
+  const [productCount, setProductCount] = React.useState(12);
   
   const [rows, setRows] = React.useState<Product[]>([]);
 
+  const filter: Filter = new Filter(rowsPerPage,page);
+
   async function get() {
-    const cat = await service.getProductsPagination(rowsPerPage.toString(), page.toString());
-    setRows(cat);
-    return cat;
+    const cat : IFilter = await service.getProductsPaginations(filter);
+    console.log(cat)
+    setRows(cat.productsList);
+    setProductCount(cat.totalItemsCount)
+    return cat.productsList;
   }
     React.useEffect(() => {
       get();

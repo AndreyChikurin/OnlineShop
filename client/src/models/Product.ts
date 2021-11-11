@@ -23,3 +23,12 @@ export class NewProduct {
     public id?: string,
   ) {}
 }
+
+export class Filter {
+  constructor(
+    public quantityPerPage: number,
+    public pageNumber: number,
+    public filter?: string,
+    public categoryId?: string,
+  ) {}
+}

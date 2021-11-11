@@ -1,5 +1,5 @@
 import { Category } from './models/Category';
-import { NewProduct } from './models/Product';
+import { Filter, NewProduct } from './models/Product';
 import { API_CATEGORIES, API_PRODUCTS, SERVER } from './utils/consts';
 
 export class Service {
@@ -26,6 +26,16 @@ export class Service {
   async getProductsPagination(quantityPerPage: string, pageNumber: string) {
     try {
       const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?quantityPerPage=' + quantityPerPage + '&pageNumber=' + pageNumber);
+      const productData = await response.json();
+      return productData;
+    } catch (error) {
+      throw Error('Failed to fetch products');
+    }
+  }
+
+  async getProductsPaginations(filter: Filter) {
+    try {
+      const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?quantityPerPage=' + filter.quantityPerPage + '&pageNumber=' + filter.pageNumber);
       const productData = await response.json();
       return productData;
     } catch (error) {
