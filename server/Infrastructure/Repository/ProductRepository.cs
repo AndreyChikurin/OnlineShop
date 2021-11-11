@@ -29,6 +29,8 @@
             int pageNumber = productFilter.PageNumber;
             var filter = productFilter.Filter;
             var categoryId = productFilter.CategoryId;
+            var priceIsMore = productFilter.PriceIsMore;
+            var priceIsLess = productFilter.PriceIsLess;
 
             quantityPerPage = Math.Abs(quantityPerPage);
             pageNumber = Math.Abs(pageNumber);
@@ -44,22 +46,28 @@
             {
                 var category = context.Categories.Where(category => category.Id == categoryId).First();
                 result = context.Products.Where(product => product.CategoryType.Id == categoryId).ToList();
-                listProductsCount = result.Count();
             }
+
+            result = result.Where(product => product.Price > priceIsMore && product.Price < priceIsLess).ToList();
+
+            listProductsCount = result.Count();
 
             if (skip >= listProductsCount)
             {
                 return null;
             }
 
-            if (filter != null && filter.ToLower() == "increasingprice")
+            if (filter != null)
             {
-                result = result.OrderBy(product => product.Price).ToList();
-            }
+                if (filter.ToLower() == "increasingprice")
+                {
+                    result = result.OrderBy(product => product.Price).ToList();
+                }
 
-            if (filter != null && filter.ToLower() == "decreasingprice")
-            {
-                result = result.OrderByDescending(product => product.Price).ToList();
+                if (filter.ToLower() == "decreasingprice")
+                {
+                    result = result.OrderByDescending(product => product.Price).ToList();
+                }
             }
 
             return result.Skip(skip).Take(take).ToList();
