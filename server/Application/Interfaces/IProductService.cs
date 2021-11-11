@@ -9,7 +9,7 @@
     {
         IEnumerable<ProductDto> GetProducts();
 
-        IEnumerable<ProductDto> GetProducts(ProductFilter productFilter);
+        ProductList GetProducts(ProductFilter productFilter);
 
         ProductDto GetProduct(Guid id);
 

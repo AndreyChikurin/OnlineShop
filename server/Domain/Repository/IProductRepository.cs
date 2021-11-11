@@ -13,6 +13,8 @@
 
         Product GetProduct(Guid id);
 
+        int GetItemsCount();
+
         void AddProduct(Product product);
 
         void EditProduct(Product product);

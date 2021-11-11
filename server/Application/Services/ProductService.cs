@@ -23,7 +23,7 @@
             return _productRepository.GetProducts().Select(x => x.AsDto()).ToList();
         }
 
-        public IEnumerable<ProductDto> GetProducts(ProductFilter productFilter)
+        public ProductList GetProducts(ProductFilter productFilter)
         {
             var products = _productRepository.GetProducts(productFilter);
 
@@ -32,7 +32,7 @@
                 return null;
             }
 
-            return products.Select(x => x.AsDto());
+            return new ProductList() { ProductsList = products.Select(x => x.AsDto()), TotalItemsCount = _productRepository.GetItemsCount() };
         }
 
         public ProductDto GetProduct(Guid id)

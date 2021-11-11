@@ -34,7 +34,7 @@
         }
 
         [HttpGet("Pagination")]
-        public IEnumerable<ProductDto> GetProducts([FromQuery] ProductFilter productFilter)
+        public ProductList GetProducts([FromQuery] ProductFilter productFilter)
         {
             return productService.GetProducts(productFilter);
         }

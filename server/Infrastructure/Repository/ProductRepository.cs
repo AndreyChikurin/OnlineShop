@@ -33,15 +33,10 @@
             quantityPerPage = Math.Abs(quantityPerPage);
             pageNumber = Math.Abs(pageNumber);
 
-            int listProductsCount = GetProducts().Count();
+            int listProductsCount = GetItemsCount();
 
             int skip = pageNumber * quantityPerPage;
             int take = listProductsCount - skip < quantityPerPage ? listProductsCount - skip : quantityPerPage;
-
-            if (skip >= listProductsCount)
-            {
-                return null;
-            }
 
             var result = context.Products.Include(c => c.CategoryType).ToList();
 
@@ -49,6 +44,12 @@
             {
                 var category = context.Categories.Where(category => category.Id == categoryId).First();
                 result = context.Products.Where(product => product.CategoryType.Id == categoryId).ToList();
+                listProductsCount = result.Count();
+            }
+
+            if (skip >= listProductsCount)
+            {
+                return null;
             }
 
             if (filter != null && filter.ToLower() == "increasingprice")
@@ -69,6 +70,11 @@
             var product = context.Products.Include(c => c.CategoryType).SingleOrDefault(x => x.Id == id);
 
             return product;
+        }
+
+        public int GetItemsCount()
+        {
+            return context.Products.Count();
         }
 
         public void AddProduct(Product product)
