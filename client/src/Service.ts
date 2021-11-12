@@ -45,7 +45,7 @@ export class Service {
         reqString = reqString + '&pageNumber=' + filter.pageNumber
       }
 
-      if(filter.priceIsLess !== undefined){
+      if(filter.priceIsLess !== undefined && filter.priceIsLess >= 100){
         reqString = reqString + '&PriceIsLess=' + filter.priceIsLess
       }
       
@@ -53,16 +53,23 @@ export class Service {
         reqString = reqString + '&PriceIsMore=' + filter.priceIsMore
       }
       
-      if(filter.categoryId !== undefined){
+      if(filter.categoryId !== ""){
         reqString = reqString + '&CategoryId=' + filter.categoryId
       }
+      
+      if(filter.filter !== ""){
+        reqString = reqString + '&Filter=' + filter.filter
+      }
+
       const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?' + reqString);
       const productData = await response.json();
       console.log(filter);
-      console.log(filter.toString());
       return productData;
-    } catch (error) {
-      throw Error('Failed to fetch products');
+    } catch {
+      const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?');
+      const productData = await response.json();
+      alert('Not found');
+      return productData;
     }
   }
 

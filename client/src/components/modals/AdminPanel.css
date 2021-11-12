@@ -28,3 +28,13 @@
 .categoryTableHeight {
   height: 41vh;
 }
+
+.filterGrid10{
+  height: 10px;
+  width: 200px;
+}
+
+.filterGrid60{
+  height: 60px;
+  width: 200px;
+}

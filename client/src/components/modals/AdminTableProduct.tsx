@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box, CardMedia, IconButton, TableFooter, TablePagination, Toolbar, Tooltip, Typography, useTheme } from '@mui/material';
+import { Box, Button, CardMedia, Grid, IconButton, MenuItem, Modal, Popover, TableFooter, TablePagination, TextField, Toolbar, Tooltip, Typography, useTheme } from '@mui/material';
 import ChangeProduct from './ChangeProduct';
 import DeleteProduct from './DeleteProduct';
 import { KeyboardArrowLeft, KeyboardArrowRight} from '@material-ui/icons';
@@ -17,28 +17,42 @@ import { Service } from 'src/Service';
 import { IFilter } from '../Interfaces/IFilter';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import AddProduct from './AddProduct';
+import ListCategories from '../ListCategories';
 
 export default function ProductTable() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const service: Service = new Service();
-
-
+  
+  const [priceIsLess, setPriceIsLess] = React.useState(2147483647);
+  const [priceIsMore, setPriceIsMore] = React.useState(0);
+  const [priceFilter, setPriceFilter] = React.useState('');
+  const [сategoryId, setCategoryId] = React.useState('');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
   const [productCount, setProductCount] = React.useState(12);
   
   const [rows, setRows] = React.useState<Product[]>([]);
 
-  const filter: Filter = new Filter(rowsPerPage,page);
+  const filter: Filter = new Filter(rowsPerPage,page,priceIsMore,priceIsLess,priceFilter,сategoryId);
 
   async function get() {
     const cat : IFilter = await service.getProductsPaginations(filter);
+    const prod : IFilter = await service.getProductsPaginations(new Filter(cat.totalItemsCount,0,priceIsMore,priceIsLess,priceFilter,сategoryId));
     setRows(cat.productsList);
-    setProductCount(cat.totalItemsCount)
+    setProductCount(prod.productsList.length);
+    console.log(cat)
     return cat.productsList;
   }
     React.useEffect(() => {
       get();
-    }, [page, rowsPerPage]);
+    }, [page, rowsPerPage,priceIsMore,priceIsLess,priceFilter,сategoryId]);
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - productCount) : 0;
@@ -57,8 +71,21 @@ export default function ProductTable() {
     setPage(0);
   }
 
-  return (
+  
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
+  const handleClicked = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseed = () => {
+    setAnchorEl(null);
+  };
+
+  const opened = Boolean(anchorEl);
+  const id = opened ? 'simple-popover' : undefined;
+
+  return (
     <TableContainer component={Paper}>
       <Table aria-label="caption table">
         <TableHead>
@@ -68,11 +95,87 @@ export default function ProductTable() {
             <TableCell align="left">Category</TableCell>
             <TableCell align="left">Price($)</TableCell>
             <TableCell align="left">Quantity</TableCell>
-            <TableCell align="left">Actions</TableCell>
+            <TableCell align="right">
+              Actions
+              <Button 
+                onClick={handleClicked}
+                startIcon={<FilterListIcon />}
+              >
+              </Button>
+              <Popover
+                id={id}
+                open={opened}
+                anchorEl={anchorEl}
+                onClose={handleCloseed}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+              >
+                <Grid container direction={'column'} >
+                <Grid item className="filterGrid60">
+                    <TextField
+                      variant="standard"
+                      select
+                      label="Category"
+                      size="small"
+                      value={сategoryId}
+                      onChange={e => {setCategoryId(e.target.value);setPage(0)}}
+                      className="filterGrid10"
+                    >
+                      {ListCategories().map(category => (
+                        <MenuItem key={category.id} value={category.id}>
+                          {category.name}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid item className="filterGrid60">
+                    <TextField
+                      variant="standard"
+                      select
+                      label="Sorting by..."
+                      size="small"
+                      value={priceFilter}
+                      onChange={e => {setPriceFilter(e.target.value);setPage(0)}}
+                      className="filterGrid10"
+                    >
+                      {[["Increasing price",'increasingprice'],["Decreasing price",'decreasingprice']].map(([key, value]) => (
+                        <MenuItem key={value} value={value}>
+                          {key}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid item className="filterGrid60">
+                    <TextField
+                      variant="standard"
+                      label="Price is more"
+                      size="small"
+                      type="number"
+                      value={priceIsMore}
+                      onChange={e => setPriceIsMore(Number(e.target.value))}
+                      className="filterGrid10"
+                    />
+                  </Grid>
+                  <Grid item className="filterGrid60">
+                    <TextField
+                      size="small"
+                      label="Price is less"
+                      variant="standard"
+                      type="number"
+                      value={priceIsLess}
+                      onChange={e => setPriceIsLess(Number(e.target.value))}
+                      className="filterGrid10"
+                    />
+                  </Grid>
+                </Grid>
+              </Popover>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          { rows.map(Product => (
+          { rows.length > 0 ? rows.map(Product => (
             <TableRow key={Product.id}>
               <TableCell component="th" scope="row">
                 <CardMedia
@@ -90,7 +193,7 @@ export default function ProductTable() {
                 <DeleteProduct {...Product}/>
               </TableCell>
             </TableRow>
-          ))}
+          )) : null}
           {emptyRows > 0 && (
             <TableRow style={{ height: 105 * emptyRows }}>
               <TableCell colSpan={6} />
@@ -99,11 +202,6 @@ export default function ProductTable() {
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell align="left" >
-              <IconButton>
-                <FilterListIcon />
-              </IconButton>
-            </TableCell>
             <TablePagination
               rowsPerPageOptions={[4, 8, 10, { label: 'All', value: productCount }]}
               colSpan={6}
