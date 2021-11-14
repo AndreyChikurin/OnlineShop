@@ -66,7 +66,7 @@ export class Service {
       console.log(filter);
       return productData;
     } catch {
-      const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?');
+      const response = await fetch(SERVER + API_PRODUCTS + '/Pagination?&quantityPerPage=4');
       const productData = await response.json();
       alert('Not found');
       return productData;

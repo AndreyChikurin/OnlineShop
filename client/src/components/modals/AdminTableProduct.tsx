@@ -112,7 +112,7 @@ export default function ProductTable() {
                   horizontal: 'left',
                 }}
               >
-                <Grid container direction={'column'} >
+                <Grid container direction={'column'} className="margin5">
                 <Grid item className="filterGrid60">
                     <TextField
                       variant="standard"
@@ -168,6 +168,11 @@ export default function ProductTable() {
                       onChange={e => setPriceIsLess(Number(e.target.value))}
                       className="filterGrid10"
                     />
+                  </Grid>
+                  <Grid item className="filterGrid60">
+                    <Button className="width200" variant="contained" color="warning" onClick={() => {setPriceIsLess(2147483647);setPriceIsMore(0);setPriceFilter('');setCategoryId('');setPage(0);setRowsPerPage(4);setProductCount(12)}}>
+                      Reset filters
+                    </Button>
                   </Grid>
                 </Grid>
               </Popover>
