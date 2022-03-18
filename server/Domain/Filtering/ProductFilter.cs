@@ -1,15 +1,12 @@
 ﻿namespace Filtering
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
 
     public class ProductFilter
     {
-        [Required]
-        public int QuantityPerPage { get; set; }
+        public int QuantityPerPage { get; set; } = int.MaxValue;
 
-        [Required]
-        public int PageNumber { get; set; }
+        public int PageNumber { get; set; } = 0;
 
         public int PriceIsMore { get; set; } = 0;
 
